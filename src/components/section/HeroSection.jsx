@@ -1,6 +1,7 @@
 import React from "react";
 import classes from "./HeroSection.module.scss";
 import logo from "../images/cart.svg";
+import shoppingLogo from "../images/shopping-cart-person.svg";
 
 function HeroSection() {
   return (
@@ -10,7 +11,8 @@ function HeroSection() {
           <h1>Everything you need at one place</h1>
           <p>shop now</p>
         </div>
-        <img src={logo} alt="cart" />
+        {/* <img src={logo} alt="cart" /> */}
+        <img src={shoppingLogo} alt="cart" />
       </div>
     </div>
   );
