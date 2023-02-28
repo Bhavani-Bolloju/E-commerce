@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./HeroSection.module.scss";
-import logo from "../images/cart.svg";
+
 import shoppingLogo from "../images/shopping-cart-person.svg";
 
 function HeroSection() {
