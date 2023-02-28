@@ -3,8 +3,8 @@ import classes from "./Header.module.scss";
 
 function Header() {
   return (
-    <header>
-      <div className={classes.nav}>
+    <header className={classes.header}>
+      <div className={classes["header-container"]}>
         <h1>Your shop</h1>
         <ul>
           <li className={classes["user_account"]}>Account</li>

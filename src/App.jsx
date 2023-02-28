@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Header from "./components/header/Header";
+import HeroSection from "./components/section/HeroSection";
 
 function App() {
   return (
     <div>
       <Header />
+      <main className="main">
+        <HeroSection />
+      </main>
     </div>
   );
 }
