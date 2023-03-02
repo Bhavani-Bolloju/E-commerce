@@ -1,10 +1,16 @@
 .product {
   width: 20rem;
   border: 1px solid #e1e7e9;
-  background-color: #f5f7f7;
+  // background-color: #f5f7f7;
   align-self: stretch;
   border-radius: 0.5rem;
   padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-self: stretch;
+
+  gap: 1rem;
   .img {
     max-width: 100%;
     height: 15rem;
@@ -15,12 +21,39 @@
     height: 100%;
     background-size: 100%;
     border-radius: 0.5rem;
-    border: 1px solid #e1e7e9;
+    // border: 1px solid #e1e7e9;
   }
 
-  .title {
-    text-align: center;
-    margin-top: 1.4rem;
-    font-size: 1.3rem;
+  &__info {
+    font-family: "Merriweather Sans", sans-serif;
+    font-size: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-weight: 500;
+    flex-wrap: wrap;
+  }
+
+  &__title {
+  }
+
+  &__price {
+    color: #60767c;
+    font-weight: 400;
+  }
+
+  .cart_button {
+    width: 60%;
+    align-self: center;
+    font-size: 1.2rem;
+    margin-top: 1.2rem;
+    padding: 0.5rem 0;
+    color: #60767c;
+    border: 1px solid #c5cfd2;
+    border-radius: 5rem;
+    &:hover {
+      cursor: pointer;
+      background-color: #e1e7e9;
+    }
   }
 }

@@ -27,6 +27,7 @@ function AllProducts() {
           images={product.images}
           title={product.title}
           id={product.id}
+          price={product.price}
         />
       );
       lastCategory = product.category;
