@@ -9,4 +9,19 @@
   padding: 2rem;
   color: #e2e7e8;
   font-weight: 300;
+
+  svg {
+    width: 2rem;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: #95a8ad6e;
+    color: #1d2426;
+    border-radius: 50%;
+
+    &:hover {
+      background: #95a8adab;
+      cursor: pointer;
+    }
+  }
 }
