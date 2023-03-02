@@ -1,10 +1,10 @@
 .heroSection {
-  background-color: #bbc7cb;
+  // background-color: #bbc7cb;
+  background-color: #f5f7f7;
 
   .container {
     display: grid;
     grid-template-columns: 1fr 35%;
-
     align-items: center;
     padding: 5rem 0;
     width: 70%;
@@ -19,7 +19,7 @@
   }
 
   h1 {
-    font-size: 5.5rem;
+    font-size: 5.2rem;
     // font-size: 5rem;
     line-height: 1;
     // line-height: 1;
