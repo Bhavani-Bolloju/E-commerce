@@ -9,7 +9,7 @@ const ProductCategory = function ({ category }) {
 
 function AllProducts() {
   const { data, error, loading } = useFetch("products");
-  console.log(data?.products);
+
   const items = [];
 
   let lastCategory = null;

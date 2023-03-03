@@ -1,27 +1,123 @@
 .product-details {
   position: fixed;
-  height: 50rem;
-  width: 50rem;
-  background-color: #3b484c;
+  height: fit-content;
+  // min-height: 45rem;
+  width: 50%;
+  // max-height: 70%;
+  background-color: #4d5d62;
   z-index: 100;
   top: 15%;
   border-radius: 0.5rem;
-  padding: 2rem;
-  color: #e2e7e8;
+  padding: 3rem;
+  color: #d9dfe0;
   font-weight: 300;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: 55% 1fr;
+  gap: 3rem;
 
-  svg {
-    width: 2rem;
+  .close {
     position: absolute;
+    font-size: 2rem;
     top: 1rem;
     right: 1rem;
-    background: #95a8ad6e;
-    color: #1d2426;
+    color: #95a8adab;
     border-radius: 50%;
 
     &:hover {
-      background: #95a8adab;
       cursor: pointer;
+      color: #95a8ad;
     }
+  }
+
+  .container {
+    display: flex;
+    gap: 2rem;
+    // height: ;
+  }
+
+  .images {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .display-image {
+    width: 100%;
+    height: 100%;
+  }
+
+  .images img {
+    width: 100%;
+    height: 28rem;
+
+    background-size: cover;
+    border-radius: 0.5rem;
+  }
+
+  .image-tumbline {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    overflow-x: scroll;
+
+    img {
+      width: 8rem;
+      height: 8rem;
+    }
+    div {
+      height: 100%;
+    }
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .product {
+    &__title {
+      margin-bottom: 1rem;
+    }
+
+    &__description {
+      font-size: 1.2rem;
+    }
+
+    &__rating {
+      display: flex;
+      gap: 0.2rem;
+      margin-top: 1.3rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid #afb3b454;
+    }
+
+    &__rate {
+      font-size: 1.3rem;
+      fill: #363855;
+    }
+
+    &__finalprice {
+      font-size: 1.3rem;
+      text-decoration: line-through;
+    }
+
+    &__discount-price {
+      padding: 1rem 0;
+    }
+
+    &__discount {
+      font-size: 1.2rem;
+      display: inline-block;
+      margin-right: 1rem;
+    }
+
+    &__price {
+    }
+  }
+  .half {
+    color: #363855;
   }
 }

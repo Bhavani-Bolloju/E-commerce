@@ -35,7 +35,6 @@ function Product({ id, images, title, price }) {
         </svg>
       </li>
       {isOpen && <ProductDetails productId={id} onClose={setIsOpen} />}
-      {/* {isOpen && } */}
       {isOpen && <Overlay onClose={setIsOpen} />}
     </>
   );
