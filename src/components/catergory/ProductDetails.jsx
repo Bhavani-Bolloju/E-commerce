@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import classes from "./ProductDetails.module.scss";
 import useFetch from "../hooks/use-fetch";
 import { RiCloseCircleLine } from "react-icons/ri";
@@ -6,7 +6,10 @@ import { ImStarFull, ImStarHalf, ImStarEmpty } from "react-icons/im";
 
 function ProductDetails({ productId, onClose }) {
   const { data, isLoading, error } = useFetch(`products/${productId}`);
-  console.log(data);
+  const [selected, setSelected] = useState(0);
+  const [selectedImage, setSelectedImage] = useState(data?.images?.[0]);
+  const imageRef = useRef(null);
+  const myRef = useRef(null);
   const totalRating = [];
   let rating = data?.rating;
   for (let i = 0; i < 5; i++) {
@@ -28,6 +31,11 @@ function ProductDetails({ productId, onClose }) {
     }
   }
 
+  const imageHandler = function (id, e) {
+    setSelectedImage(e.target.src);
+    setSelected(id);
+  };
+
   return (
     <div className={classes["product-details"]}>
       <RiCloseCircleLine
@@ -35,16 +43,28 @@ function ProductDetails({ productId, onClose }) {
         onClick={() => onClose(false)}
       />
       {data && (
-        <div className={classes.images}>
+        <div className={classes["images-container"]}>
           <div className={classes["display-image"]}>
-            <img src={data?.images?.[0] || ""} alt={data?.title} />
+            <img
+              ref={myRef}
+              src={selectedImage || data?.images?.[0]}
+              alt={data?.title}
+            />
           </div>
           <div className={classes["image-tumbline"]}>
-            {data.images.slice(0, -1).map((image, i) => (
-              <div key={i}>
-                <img src={image} alt={data?.title} />
-              </div>
-            ))}
+            <ul>
+              {data.images.map((image, i) => (
+                <div key={i}>
+                  <img
+                    className={selected === i ? classes.selected : ""}
+                    ref={selected === i ? imageRef : null}
+                    onClick={(e) => imageHandler(i, e)}
+                    src={image}
+                    alt={data?.title}
+                  />
+                </div>
+              ))}
+            </ul>
           </div>
         </div>
       )}
