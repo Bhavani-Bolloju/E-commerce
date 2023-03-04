@@ -62,7 +62,9 @@
     align-items: center;
     justify-content: center;
     gap: 2rem;
+    width: 100%;
     overflow-x: scroll;
+    padding: 0 2rem;
 
     img {
       width: 8rem;
@@ -84,19 +86,20 @@
 
     &__description {
       font-size: 1.2rem;
+      line-height: 2.2rem;
     }
 
     &__rating {
       display: flex;
       gap: 0.2rem;
-      margin-top: 1.3rem;
-      padding-bottom: 1.5rem;
+      margin-top: 1.5rem;
+      padding-bottom: 1.8rem;
       border-bottom: 1px solid #afb3b454;
     }
 
     &__rate {
       font-size: 1.3rem;
-      fill: #363855;
+      fill: #888dd1;
     }
 
     &__finalprice {
@@ -116,8 +119,65 @@
 
     &__price {
     }
+
+    &__items {
+      display: flex;
+      margin: 1rem 0;
+      border-radius: 5rem;
+      align-items: center;
+      justify-content: space-between;
+      border-radius: 5rem;
+      background-color: #445454;
+      width: fit-content;
+      color: #f3f4f8;
+      font-weight: 600;
+      padding: 0 1rem;
+    }
+    &__stock-items {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    &__remove-item {
+      padding: 0.5rem 0.8rem;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    &__count {
+      padding: 0.3rem 0.8rem;
+    }
+    &__add-item {
+      padding: 0.5rem 0.8rem;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    &__stock {
+      font-size: 1.2rem;
+    }
+  }
+  .btns {
+    text-align: center;
+  }
+  .cart-btn {
+    margin: 3rem 0;
+    background-color: #a9bbbb;
+    border: none;
+    color: #445454;
+    font-weight: 700;
+    padding: 0.8rem 1.8rem;
+    border-radius: 5rem;
+    text-align: center;
+    &:hover {
+      cursor: pointer;
+      background-color: #a9bbbbe0;
+    }
   }
   .half {
-    color: #363855;
+    font-size: 1.2rem;
+    color: #888dd1;
   }
 }

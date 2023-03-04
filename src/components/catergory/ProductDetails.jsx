@@ -14,13 +14,17 @@ function ProductDetails({ productId, onClose }) {
     const rate = Math.floor(rating);
 
     if (rate === 0) {
-      totalRating.push(<ImStarHalf className={classes["product__rate"]} />);
+      totalRating.push(
+        <ImStarHalf key={i} className={classes["product__rate"]} />
+      );
     }
     if (rate < 0) {
-      totalRating.push(<ImStarEmpty className={classes.half} />);
+      totalRating.push(<ImStarEmpty key={i} className={classes.half} />);
     }
     if (rate > 0) {
-      totalRating.push(<ImStarFull className={classes["product__rate"]} />);
+      totalRating.push(
+        <ImStarFull key={i} className={classes["product__rate"]} />
+      );
     }
   }
 
@@ -33,7 +37,7 @@ function ProductDetails({ productId, onClose }) {
       {data && (
         <div className={classes.images}>
           <div className={classes["display-image"]}>
-            <img src={data?.images[0]} alt={data?.title} />
+            <img src={data?.images?.[0] || ""} alt={data?.title} />
           </div>
           <div className={classes["image-tumbline"]}>
             {data.images.slice(0, -1).map((image, i) => (
@@ -63,6 +67,31 @@ function ProductDetails({ productId, onClose }) {
           </div>
           <div className={classes["product__finalprice"]}>
             MRP: ${data?.price}
+          </div>
+          <div className={classes["product__stock-items"]}>
+            <div className={classes["product__items"]}>
+              <span htmlFor="add" className={classes["product__remove-item"]}>
+                -
+              </span>
+              <span
+                type="number"
+                id="add"
+                min="1"
+                max={data?.stock}
+                className={classes["product__count"]}
+              >
+                1
+              </span>
+              <span htmlFor="add" className={classes["product__add-item"]}>
+                +
+              </span>
+            </div>
+            <span className={classes["product__stock"]}>
+              only {data?.stock} items left.
+            </span>
+          </div>
+          <div className={classes["btns"]}>
+            <button className={classes["cart-btn"]}>Add to cart</button>
           </div>
         </div>
       )}
