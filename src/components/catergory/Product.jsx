@@ -1,13 +1,20 @@
 import React, { useState } from "react";
-import classes from "./Product.module.scss";
 import ProductDetails from "./ProductDetails";
 import Overlay from "../../UI/Overlay";
+import { FiHeart } from "react-icons/fi";
+import classes from "./Product.module.scss";
 
-function Product({ id, images, title, price }) {
+function Product({ id, images, title, price, discount }) {
   const [isOpen, setIsOpen] = useState(false);
+  const discountPrice = (price - price * (discount / 100)).toFixed(2);
 
   const detailProductHandler = function () {
     setIsOpen(true);
+  };
+
+  const addToCardHandler = function (img, title, price, id) {
+    //dispatch action here to add item to the cart
+    console.log(title, price);
   };
 
   return (
@@ -18,21 +25,21 @@ function Product({ id, images, title, price }) {
         </div>
         <div className={classes["product__info"]}>
           <p className={classes["product__title"]}>{title}</p>
-          <p className={classes["product__price"]}>${price}</p>
-          <button className={classes["cart_button"]}>Add to cart</button>
+          <p className={classes["product__price"]}>
+            <span className={classes.originalPrice}>${price}</span>
+            <span className={classes.discountPrice}>${discountPrice}</span>
+          </p>
+          <button
+            className={classes["cart_button"]}
+            onClick={(e) => {
+              e.stopPropagation();
+              addToCardHandler(images[0], title, discountPrice, id);
+            }}
+          >
+            Add to cart
+          </button>
         </div>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
-          />
-        </svg>
+        <FiHeart />
       </li>
       {isOpen && <ProductDetails productId={id} onClose={setIsOpen} />}
       {isOpen && <Overlay onClose={setIsOpen} />}

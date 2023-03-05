@@ -1,0 +1,14 @@
+.cart {
+  width: 50rem;
+  min-height: 30rem;
+  background-color: #4d5d62;
+  color: #eff1f2;
+  position: fixed;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 300;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
+}

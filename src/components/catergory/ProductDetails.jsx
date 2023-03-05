@@ -54,9 +54,8 @@ function ProductDetails({ productId, onClose }) {
           <div className={classes["image-tumbline"]}>
             <ul>
               {data.images.map((image, i) => (
-                <div key={i}>
+                <div key={i} className={selected === i ? classes.selected : ""}>
                   <img
-                    className={selected === i ? classes.selected : ""}
                     ref={selected === i ? imageRef : null}
                     onClick={(e) => imageHandler(i, e)}
                     src={image}

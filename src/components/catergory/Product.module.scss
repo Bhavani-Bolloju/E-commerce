@@ -40,6 +40,13 @@
   &__price {
     color: #60767c;
     font-weight: 400;
+    display: flex;
+    gap: 1rem;
+
+    .originalPrice {
+      text-decoration: line-through;
+      color: #60767cc2;
+    }
   }
 
   .cart_button {
@@ -58,14 +65,14 @@
   }
 
   svg {
-    width: 2rem;
+    font-size: 2.5rem;
     position: absolute;
     right: 0.5rem;
     top: 0.5rem;
-    color: #60767c;
+    color: #7c969d;
     background: #f5f7f7;
     border-radius: 50%;
-    padding: 0.3rem;
+    padding: 0.5rem;
   }
   &:hover {
     cursor: pointer;

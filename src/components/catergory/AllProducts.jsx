@@ -9,7 +9,6 @@ const ProductCategory = function ({ category }) {
 
 function AllProducts() {
   const { data, error, loading } = useFetch("products");
-
   const items = [];
 
   let lastCategory = null;
@@ -28,6 +27,7 @@ function AllProducts() {
           title={product.title}
           id={product.id}
           price={product.price}
+          discount={product.discountPercentage}
         />
       );
       lastCategory = product.category;

@@ -4,7 +4,6 @@
   height: 5.2rem;
 
   color: #f5f7f7;
-  // font-weight: 700;
 
   &-container {
     padding: 0rem 10rem;
@@ -24,31 +23,27 @@
     font-size: 1.8rem;
   }
 
-  ul {
+  .header-btns {
     display: flex;
-    list-style: none;
-    gap: 5rem;
+    align-items: center;
+    justify-content: center;
   }
 
   .cart,
   .user_account {
     display: flex;
     gap: 0.5rem;
-    align-items: flex-end;
+    align-items: center;
     justify-content: center;
-  }
-
-  .user_account {
-    padding: 0.5rem 3rem;
-    svg {
-      width: 2rem;
-      height: 2rem;
-    }
+    background-color: transparent;
+    color: inherit;
+    padding: 0.2rem 3rem;
+    border: none;
+    outline: none;
   }
 
   svg {
-    width: 2.2rem;
-    height: 2.2rem;
+    font-size: 1.8rem;
   }
 
   .cart {
