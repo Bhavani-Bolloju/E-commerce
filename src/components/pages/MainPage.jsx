@@ -4,7 +4,7 @@ import AllProducts from "../catergory/AllProducts";
 
 import { Routes, Route } from "react-router-dom";
 
-function MainSection() {
+function MainPage() {
   return (
     <main className="main">
       <HeroSection />
@@ -13,4 +13,4 @@ function MainSection() {
   );
 }
 
-export default MainSection;
+export default MainPage;

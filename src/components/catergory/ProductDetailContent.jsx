@@ -1,32 +1,54 @@
-import React from "react";
+import React, { useState } from "react";
 import classes from "./ProductDetailContent.module.scss";
+import { addCart } from "../store/cartSlice";
+import { useDispatch } from "react-redux";
 
 function ProductDetailContent({
   title,
   description,
   totalRating,
-  discountPercentage,
+  discount,
   price,
   stock,
   id,
+  image,
 }) {
+  const [count, setCount] = useState(1);
+
+  const dispatch = useDispatch();
+
+  const increaseQtyHandler = function () {
+    if (count >= stock) return;
+    setCount((prev) => (prev += 1));
+  };
+
+  const decreaseQtyHandler = function () {
+    if (count <= 1) return;
+    setCount((prev) => (prev -= 1));
+  };
+  const addToCartHandler = function () {
+    dispatch(addCart({ title, price, qty: count, id, image, discount }));
+  };
+
   return (
     <div>
       <h4 className={classes["product__title"]}>{title}</h4>
       <p className={classes["product__description"]}>{description}</p>
       <div className={classes["product__rating"]}>{totalRating}</div>
       <div className={classes["product__discount-price"]}>
-        <span className={classes["product__discount"]}>
-          (-{discountPercentage}%)
-        </span>
+        <span className={classes["product__discount"]}>(-{discount}%)</span>
         <span className={classes["product__price"]}>
-          ${(price - price * (discountPercentage / 100)).toFixed(2)}
+          ${(price - price * (discount / 100)).toFixed(2)}
         </span>
       </div>
       <div className={classes["product__finalprice"]}>MRP: ${price}</div>
       <div className={classes["product__stock-items"]}>
         <div className={classes["product__items"]}>
-          <span htmlFor="add" className={classes["product__remove-item"]}>
+          <span
+            htmlFor="add"
+            className={classes["product__remove-item"]}
+            onClick={decreaseQtyHandler}
+          >
             -
           </span>
           <span
@@ -36,9 +58,13 @@ function ProductDetailContent({
             max={stock}
             className={classes["product__count"]}
           >
-            1
+            {count}
           </span>
-          <span htmlFor="add" className={classes["product__add-item"]}>
+          <span
+            htmlFor="add"
+            className={classes["product__add-item"]}
+            onClick={increaseQtyHandler}
+          >
             +
           </span>
         </div>
@@ -47,7 +73,9 @@ function ProductDetailContent({
         </span>
       </div>
       <div className={classes["btns"]}>
-        <button className={classes["cart-btn"]}>Add to cart</button>
+        <button className={classes["cart-btn"]} onClick={addToCartHandler}>
+          Add to cart
+        </button>
       </div>
     </div>
   );

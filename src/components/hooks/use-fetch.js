@@ -12,7 +12,7 @@ const useFetch = function (url) {
     `https://dummyjson.com/${url}`,
     fetcher
   );
-  console.log(error);
+  // console.log(error);
 
   return {
     data,

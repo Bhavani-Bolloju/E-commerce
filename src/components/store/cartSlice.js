@@ -14,7 +14,10 @@ const cartSlice = createSlice({
 
       if (index >= 0) {
         const item = items[index];
-        const updateItem = { ...item, qty: +item.qty + 1 };
+        const updateItem = {
+          ...item,
+          qty: action.payload.qty + item.qty,
+        };
         state.cartItems[index] = updateItem;
       } else {
         state.cartItems.push(action.payload);

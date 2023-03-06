@@ -19,7 +19,6 @@ function Product({ id, images, title, price, discount }) {
   const addToCardHandler = function (image, title, price, id) {
     //dispatch action here to add item to the cart
     dispatch(addCart({ title, price, qty: 1, id, image, discount }));
-    // console.log(title, price);
   };
 
   return (

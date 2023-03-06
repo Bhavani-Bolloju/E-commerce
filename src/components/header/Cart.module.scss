@@ -1,17 +1,7 @@
 .cart {
-  max-width: 60%;
-  min-width: 50rem;
-  height: 80vh;
-  margin: 2rem auto;
-  background-color: #ced7da;
-  padding: 2rem;
-  border-radius: 0.9rem;
-
-  h3 {
+  .emptyCart {
     text-align: center;
-    margin: 1rem 0 2rem 0;
   }
-
   &__items {
     list-style: none;
     display: flex;

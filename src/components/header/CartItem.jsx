@@ -8,7 +8,7 @@ function CartItem({ item }) {
   const dispatch = useDispatch();
 
   const increaseQuantityHandler = function () {
-    dispatch(addCart({ ...item }));
+    dispatch(addCart({ ...item, qty: 1 }));
   };
   const descreaseQuantityHandler = function () {
     dispatch(removeCart(id));

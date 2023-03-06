@@ -9,9 +9,8 @@ function Cart() {
 
   return (
     <div className={classes.cart}>
-      <h3>Cart Items</h3>
-      {cartItems && cartItems.length < 0 ? (
-        <p>Empty cart</p>
+      {cartItems && cartItems.length <= 0 ? (
+        <p className={classes.emptyCart}>Empty cart</p>
       ) : (
         <ul className={classes["cart__items"]}>
           {cartItems?.map((item, i) => (
@@ -24,10 +23,3 @@ function Cart() {
 }
 
 export default Cart;
-
-/*
-title
-price
-quantity
-
-*/

@@ -12,8 +12,6 @@ function ProductDetails({ productId, onClose }) {
   const imageRef = useRef(null);
   const myRef = useRef(null);
 
-  console.log(data);
-
   const totalRating = [];
 
   let rating = data?.rating;
@@ -77,10 +75,11 @@ function ProductDetails({ productId, onClose }) {
           title={data?.title}
           description={data?.description}
           totalRating={totalRating}
-          discountPercentage={data?.discountPercentage}
+          discount={data?.discountPercentage}
           price={data?.price}
           stock={data?.stock}
           id={data?.id}
+          image={data?.images[0]}
         />
       )}
     </div>

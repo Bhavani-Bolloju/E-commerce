@@ -8,13 +8,22 @@ const ProductCategory = function ({ category }) {
 };
 
 function AllProducts() {
-  const { data, error, loading } = useFetch("products");
+  // const { data, error, loading } = useFetch("products");
+  const getData = JSON.parse(localStorage.getItem("products"));
+
+  if (!getData) {
+    const storeData = localStorage.setItem(
+      "products",
+      JSON.stringify(data.products)
+    );
+  }
+
   const items = [];
 
   let lastCategory = null;
 
-  data?.products &&
-    data?.products?.forEach((product) => {
+  getData &&
+    getData.forEach((product) => {
       if (product.category !== lastCategory) {
         items.push(
           <ProductCategory category={product.category} key={product.category} />
