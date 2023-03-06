@@ -3,18 +3,23 @@ import ProductDetails from "./ProductDetails";
 import Overlay from "../../UI/Overlay";
 import { FiHeart } from "react-icons/fi";
 import classes from "./Product.module.scss";
+import { useDispatch } from "react-redux";
+import { addCart } from "../store/cartSlice";
 
 function Product({ id, images, title, price, discount }) {
   const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
+
   const discountPrice = (price - price * (discount / 100)).toFixed(2);
 
   const detailProductHandler = function () {
     setIsOpen(true);
   };
 
-  const addToCardHandler = function (img, title, price, id) {
+  const addToCardHandler = function (image, title, price, id) {
     //dispatch action here to add item to the cart
-    console.log(title, price);
+    dispatch(addCart({ title, price, qty: 1, id, image, discount }));
+    // console.log(title, price);
   };
 
   return (
@@ -33,7 +38,7 @@ function Product({ id, images, title, price, discount }) {
             className={classes["cart_button"]}
             onClick={(e) => {
               e.stopPropagation();
-              addToCardHandler(images[0], title, discountPrice, id);
+              addToCardHandler(images[0], title, discountPrice, id, discount);
             }}
           >
             Add to cart
