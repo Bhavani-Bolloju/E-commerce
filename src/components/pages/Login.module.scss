@@ -50,4 +50,15 @@
     text-align: center;
     color: #f77;
   }
+
+  .switch {
+    font-size: 1.2rem;
+    text-align: center;
+
+    span:hover {
+      display: inline-block;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
 }
