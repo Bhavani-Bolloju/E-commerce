@@ -10,7 +10,7 @@ function SavedItems() {
   return (
     <div>
       {savedItems && savedItems.length <= 0 ? (
-        <p>no item saved</p>
+        <p className={classes.empty}>No item saved</p>
       ) : (
         <ul className={classes["saved-items"]}>
           {savedItems?.map((item) => (

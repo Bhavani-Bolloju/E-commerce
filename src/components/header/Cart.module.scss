@@ -5,7 +5,30 @@
   gap: 2rem;
 
   .emptyCart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
+    height: 100%;
+    color: #95a8ad;
+    font-size: 1.2rem;
+    img {
+      width: 60%;
+      margin-left: 5rem;
+      backdrop-filter: blur(2px);
+    }
+    span {
+      margin-right: 1rem;
+    }
+    a {
+      text-decoration: none;
+      color: #3b484c;
+      margin-top: 2rem;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 
   &__items {
@@ -19,9 +42,24 @@
     }
   }
 
+  .order {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row-reverse;
+    align-items: center;
+    button {
+      border: none;
+      background-color: #a8b7bc;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
   .totalAmount {
     display: flex;
-    align-self: flex-end;
     padding: 0 3rem;
     font-size: 1.4rem;
 
