@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./CartItem.module.scss";
-import { addCart, removeCart } from "../store/cartSlice";
+import { addItem, removeItem } from "../store/cartSlice";
 import { useDispatch } from "react-redux";
 
 function CartItem({ item }) {
@@ -8,10 +8,10 @@ function CartItem({ item }) {
   const dispatch = useDispatch();
 
   const increaseQuantityHandler = function () {
-    dispatch(addCart({ ...item, qty: 1 }));
+    dispatch(addItem({ ...item, qty: 1 }));
   };
   const descreaseQuantityHandler = function () {
-    dispatch(removeCart(id));
+    dispatch(removeItem(id));
   };
 
   return (

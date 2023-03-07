@@ -79,7 +79,7 @@ function ProductDetails({ productId, onClose }) {
           price={data?.price}
           stock={data?.stock}
           id={data?.id}
-          image={data?.images[0]}
+          image={data?.images?.[0]}
         />
       )}
     </div>

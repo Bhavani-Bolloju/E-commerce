@@ -2,6 +2,7 @@ import React from "react";
 import classes from "./AllProducts.module.scss";
 import useFetch from "../hooks/use-fetch";
 import Product from "./Product";
+import { useSelector } from "react-redux";
 
 const ProductCategory = function ({ category }) {
   return <h2 className={classes.heading}>{category}</h2>;
@@ -10,6 +11,9 @@ const ProductCategory = function ({ category }) {
 function AllProducts() {
   // const { data, error, loading } = useFetch("products");
   const getData = JSON.parse(localStorage.getItem("products"));
+  const { savedItems } = useSelector((state) => state.cart);
+
+  const filterIds = savedItems.map((item) => item.id);
 
   if (!getData) {
     const storeData = localStorage.setItem(
@@ -36,6 +40,7 @@ function AllProducts() {
           title={product.title}
           id={product.id}
           price={product.price}
+          saved={filterIds.includes(product.id)}
           discount={product.discountPercentage}
         />
       );

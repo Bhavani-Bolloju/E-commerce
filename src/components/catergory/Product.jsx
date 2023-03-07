@@ -4,10 +4,11 @@ import Overlay from "../../UI/Overlay";
 import { FiHeart } from "react-icons/fi";
 import classes from "./Product.module.scss";
 import { useDispatch } from "react-redux";
-import { addCart } from "../store/cartSlice";
+import { addItem, saveItem } from "../store/cartSlice";
 
-function Product({ id, images, title, price, discount }) {
+function Product({ id, images, title, price, discount, saved }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [save, onSave] = useState(saved);
   const dispatch = useDispatch();
 
   const discountPrice = (price - price * (discount / 100)).toFixed(2);
@@ -17,8 +18,12 @@ function Product({ id, images, title, price, discount }) {
   };
 
   const addToCardHandler = function (image, title, price, id) {
-    //dispatch action here to add item to the cart
-    dispatch(addCart({ title, price, qty: 1, id, image, discount }));
+    dispatch(addItem({ title, price, qty: 1, id, image, discount }));
+  };
+
+  const saveItemHandler = function (title, price, id, image, discount) {
+    onSave((prev) => !prev);
+    dispatch(saveItem({ title, price, id, image, discount }));
   };
 
   return (
@@ -43,7 +48,13 @@ function Product({ id, images, title, price, discount }) {
             Add to cart
           </button>
         </div>
-        <FiHeart />
+        <FiHeart
+          className={save ? classes["saved"] : classes[""]}
+          onClick={(e) => {
+            e.stopPropagation();
+            saveItemHandler(title, price, id, images[0], discount);
+          }}
+        />
       </li>
       {isOpen && <ProductDetails productId={id} onClose={setIsOpen} />}
       {isOpen && <Overlay onClose={setIsOpen} />}

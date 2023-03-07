@@ -1,16 +1,15 @@
 .item {
   width: 80%;
-  margin: auto;
+  margin: 0 auto;
   display: grid;
   grid-auto-flow: column;
   grid-template-columns: 5rem 1fr;
   font-size: 1.2rem;
   justify-content: start;
   border-bottom: 1px solid #eee;
-  padding-bottom: 2rem;
-
-  gap: 2rem;
-
+  padding: 2rem 0;
+  row-gap: 1rem;
+  column-gap: 2.5rem;
   .image {
     width: 6rem;
     height: 6rem;
@@ -23,7 +22,7 @@
     p {
       font-size: 1rem;
       position: absolute;
-      top: -1.5rem;
+      top: -1.8rem;
       left: 0rem;
       color: #f78282;
     }

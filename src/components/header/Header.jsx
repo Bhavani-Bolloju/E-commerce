@@ -34,7 +34,7 @@ function Header() {
           <button className={classes.cart} onClick={toggleCartHandler}>
             <BsCart4 />
             <span>cart</span>
-            <span className={classes.totalCartItems}>{totalCount}</span>
+            <span className={classes.badge}>{totalCount}</span>
           </button>
         </div>
       </div>

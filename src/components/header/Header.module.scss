@@ -7,7 +7,8 @@
 
   &-container {
     padding: 0rem 10rem;
-    background-color: #2c3639;
+    background-color: #2c3639d9;
+    backdrop-filter: blur(5px);
     position: fixed;
     height: inherit;
     display: flex;
@@ -50,7 +51,7 @@
   }
 
   .cart {
-    background-color: #425156;
+    background-color: #586d73;
     padding: 0.5rem 3rem;
     border-radius: 2rem;
 
@@ -59,10 +60,11 @@
       background-color: #516369;
     }
 
-    .totalCartItems {
-      background-color: #252d2f;
-      padding: 0.2rem 0.8rem;
+    .badge {
+      background-color: #425156;
+      padding: 0.5rem 0.7rem;
       border-radius: 50%;
+      font-size: 1rem;
     }
   }
 }

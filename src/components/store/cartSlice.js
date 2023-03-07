@@ -2,18 +2,23 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   cartItems: [],
+  totalAmount: 0,
+  savedItems: [],
 };
 
 const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addCart: (state, action) => {
+    addItem: (state, action) => {
+      console.log(action.payload);
       const items = [...state.cartItems];
       const index = items.findIndex((item) => item.id == action.payload.id);
-
+      const item = items[index];
+      // cartSlice.totalAmount = action.payload.price * action.payload.qty;
+      state.totalAmount += +action.payload.price * +action.payload.qty;
+      console.log(action.payload.price * action.payload.qty);
       if (index >= 0) {
-        const item = items[index];
         const updateItem = {
           ...item,
           qty: action.payload.qty + item.qty,
@@ -23,24 +28,45 @@ const cartSlice = createSlice({
         state.cartItems.push(action.payload);
       }
     },
-    removeCart: (state, action) => {
+    removeItem: (state, action) => {
       const items = [...state.cartItems];
       const index = items.findIndex((item) => item.id === action.payload);
       const item = items[index];
+      state.totalAmount -= item.price;
+
       if (item.qty <= 1) {
         const filteredItems = items.filter(
           (item) => item.id !== action.payload
         );
-        console.log(filteredItems);
+        // console.log(filteredItems);
         state.cartItems = filteredItems;
       } else {
         const updatedItem = { ...item, qty: +item.qty - 1 };
         state.cartItems[index] = updatedItem;
       }
     },
+    saveItem: (state, action) => {
+      const items = [...state.savedItems];
+      const index = items.findIndex((item) => item.id === action.payload.id);
+
+      if (index < 0) {
+        state.savedItems.push(action.payload);
+      } else {
+        const filterItems = items.filter(
+          (item) => item.id !== action.payload.id
+        );
+        state.savedItems = filterItems;
+      }
+    },
+    removeSavedItem: (state, action) => {
+      const items = [...state.savedItems];
+      const filterItems = items.filter((item) => item.id !== action.payload);
+      state.savedItems = filterItems;
+    },
   },
 });
 
-export const { addCart, removeCart } = cartSlice.actions;
+export const { addItem, removeItem, saveItem, removeSavedItem } =
+  cartSlice.actions;
 
 export default cartSlice.reducer;

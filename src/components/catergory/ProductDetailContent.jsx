@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import classes from "./ProductDetailContent.module.scss";
-import { addCart } from "../store/cartSlice";
+import { addItem } from "../store/cartSlice";
 import { useDispatch } from "react-redux";
 
 function ProductDetailContent({
@@ -27,7 +27,7 @@ function ProductDetailContent({
     setCount((prev) => (prev -= 1));
   };
   const addToCartHandler = function () {
-    dispatch(addCart({ title, price, qty: count, id, image, discount }));
+    dispatch(addItem({ title, price, qty: count, id, image, discount }));
   };
 
   return (

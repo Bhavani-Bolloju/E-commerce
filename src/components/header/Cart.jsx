@@ -4,8 +4,7 @@ import classes from "./Cart.module.scss";
 import CartItem from "./CartItem";
 
 function Cart() {
-  const { cartItems } = useSelector((state) => state.cart);
-  console.log(cartItems);
+  const { cartItems, totalAmount } = useSelector((state) => state.cart);
 
   return (
     <div className={classes.cart}>
@@ -18,6 +17,12 @@ function Cart() {
           ))}
         </ul>
       )}
+      <div className={classes.totalAmount}>
+        <div className={classes.title}>Total Price:</div>
+        <div className={classes.price}>
+          ${Math.abs(+totalAmount).toFixed(2)}
+        </div>
+      </div>
     </div>
   );
 }
