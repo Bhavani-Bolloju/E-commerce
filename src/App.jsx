@@ -8,11 +8,15 @@ import { useSelector } from "react-redux";
 import CartPage from "./components/pages/CartPage";
 import Cart from "./components/header/Cart";
 import LoginPage from "./components/pages/LoginPage";
+import useAuth from "./components/hooks/use-auth";
+import { AuthContext } from "./components/context/authContext";
 
 function App() {
+  const { user } = useAuth();
+
   const cart = useSelector((state) => state.cart);
   return (
-    <div>
+    <AuthContext.Provider value={{ user }}>
       <Header />
       <Routes>
         <Route path="/" element={<MainPage />} />
@@ -23,7 +27,7 @@ function App() {
         </Route>
         <Route path="/login" element={<LoginPage />}></Route>
       </Routes>
-    </div>
+    </AuthContext.Provider>
   );
 }
 

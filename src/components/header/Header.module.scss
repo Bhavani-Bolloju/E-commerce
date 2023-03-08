@@ -59,6 +59,18 @@
     }
   }
 
+  .user-auth {
+    button {
+      background-color: transparent;
+      border: none;
+      color: inherit;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
   .cart,
   .user_account {
     display: flex;

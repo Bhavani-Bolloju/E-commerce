@@ -1,14 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useContext } from "react";
 import classes from "./Header.module.scss";
 import { BsCart4 } from "react-icons/bs";
 import { CiUser } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase/firebase";
+import { AuthContext } from "../context/authContext";
 
 function Header() {
   const navigate = useNavigate();
   const { cartItems } = useSelector((state) => state.cart);
   const [open, setOpen] = useState(false);
+
+  const { user } = useContext(AuthContext);
 
   const totalCount = cartItems
     .map((item) => item.qty)
@@ -36,14 +41,37 @@ function Header() {
           <div className={classes.user}>
             <button
               className={classes["user_account"]}
-              onClick={userAccountHandler}
+              onClick={() => userAccountHandler()}
             >
               <CiUser /> <span>Account</span>
             </button>
             {open && (
-              <ul>
-                <li>Sign In</li>
-                <li>Log out</li>
+              <ul className={classes["user-auth"]}>
+                <li>
+                  {!user && (
+                    <button
+                      onClick={() => {
+                        navigate("/login");
+                        setOpen(false);
+                      }}
+                    >
+                      Signup/login
+                    </button>
+                  )}
+                </li>
+
+                <li>
+                  {user && (
+                    <button
+                      onClick={() => {
+                        signOut(auth);
+                        setOpen(false);
+                      }}
+                    >
+                      Log out
+                    </button>
+                  )}
+                </li>
               </ul>
             )}
           </div>

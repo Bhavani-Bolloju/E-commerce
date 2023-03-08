@@ -37,6 +37,7 @@
     flex-direction: column;
     gap: 3rem;
     overflow-y: auto;
+
     &::-webkit-scrollbar {
       display: none;
     }
