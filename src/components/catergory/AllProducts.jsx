@@ -10,7 +10,11 @@ const ProductCategory = function ({ category }) {
 
 function AllProducts() {
   // const { data, error, loading } = useFetch("products");
+
+  // console.log(data);
+  // localStorage.setItem("products", JSON.stringify(data.products));
   const getData = JSON.parse(localStorage.getItem("products"));
+  // console.log(getData);
   const { savedItems } = useSelector((state) => state.cart);
 
   const filterIds = savedItems.map((item) => item.id);
@@ -18,7 +22,7 @@ function AllProducts() {
   if (!getData) {
     const storeData = localStorage.setItem(
       "products",
-      JSON.stringify(data.products)
+      JSON.stringify(data?.products)
     );
   }
 

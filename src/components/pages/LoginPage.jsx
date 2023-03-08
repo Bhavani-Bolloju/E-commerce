@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useContext } from "react";
 import classes from "./Login.module.scss";
 import {
   createUserWithEmailAndPassword,
@@ -7,6 +7,7 @@ import {
 import { auth, db } from "../firebase/firebase";
 import { addDoc, collection } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/authContext";
 
 function SignupPage() {
   const fullnameRef = useRef(null);
@@ -14,6 +15,9 @@ function SignupPage() {
   const passwordRef = useRef(null);
   const [error, setError] = useState(null);
   const [signedIn, setSignedIn] = useState(false);
+
+  const { login } = useContext(AuthContext);
+  // console.log(login);
 
   const navigate = useNavigate();
 
@@ -30,7 +34,12 @@ function SignupPage() {
           email,
           password
         );
+
         if (!loginUser) throw new Error("failed to login");
+
+        const token = loginUser.user.accessToken;
+        login(token);
+
         navigate("/");
       } catch (error) {
         setError(error.message);
@@ -40,6 +49,7 @@ function SignupPage() {
       try {
         const res = await createUserWithEmailAndPassword(auth, email, password);
         const user = res.user;
+        console.log(user);
         if (!res) throw new Error("user already exists");
         const addData = await addDoc(collection(db, "users"), {
           uid: user.uid,
@@ -48,7 +58,6 @@ function SignupPage() {
         fullnameRef.current.value = "";
         navigate("/");
       } catch (error) {
-        console.log(error);
         setError(error.message);
       }
     }

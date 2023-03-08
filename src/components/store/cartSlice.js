@@ -4,6 +4,7 @@ const initialState = {
   cartItems: [],
   totalAmount: 0,
   savedItems: [],
+  user: null,
 };
 
 const cartSlice = createSlice({
@@ -60,10 +61,14 @@ const cartSlice = createSlice({
       const filterItems = items.filter((item) => item.id !== action.payload);
       state.savedItems = filterItems;
     },
+    loggedUser: (state, action) => {
+      console.log(action.payload);
+      state.user = action.payload;
+    },
   },
 });
 
-export const { addItem, removeItem, saveItem, removeSavedItem } =
+export const { addItem, removeItem, saveItem, removeSavedItem, loggedUser } =
   cartSlice.actions;
 
 export default cartSlice.reducer;

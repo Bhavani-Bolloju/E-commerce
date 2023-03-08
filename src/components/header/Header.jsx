@@ -13,7 +13,7 @@ function Header() {
   const { cartItems } = useSelector((state) => state.cart);
   const [open, setOpen] = useState(false);
 
-  const { user } = useContext(AuthContext);
+  const { isLoggedIn, logout } = useContext(AuthContext);
 
   const totalCount = cartItems
     .map((item) => item.qty)
@@ -48,7 +48,7 @@ function Header() {
             {open && (
               <ul className={classes["user-auth"]}>
                 <li>
-                  {!user && (
+                  {!isLoggedIn && (
                     <button
                       onClick={() => {
                         navigate("/login");
@@ -61,10 +61,11 @@ function Header() {
                 </li>
 
                 <li>
-                  {user && (
+                  {isLoggedIn && (
                     <button
                       onClick={() => {
                         signOut(auth);
+                        logout();
                         setOpen(false);
                       }}
                     >
