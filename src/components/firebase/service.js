@@ -44,3 +44,7 @@ export const addAddress = async function (docId, address) {
     address: address,
   });
 };
+
+export const getAddress = async function () {
+  // const data =
+};

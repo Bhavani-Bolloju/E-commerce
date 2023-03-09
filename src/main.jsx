@@ -6,13 +6,16 @@ import { store } from "./components/store/store";
 import { BrowserRouter } from "react-router-dom";
 
 import "./main.scss";
+import AuthContextProvider from "./components/context/authContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </BrowserRouter>
+    <AuthContextProvider>
+      <BrowserRouter>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </BrowserRouter>
+    </AuthContextProvider>
   </React.StrictMode>
 );

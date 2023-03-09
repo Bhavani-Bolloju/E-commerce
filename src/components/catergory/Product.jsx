@@ -5,11 +5,13 @@ import { FiHeart } from "react-icons/fi";
 import classes from "./Product.module.scss";
 import { useDispatch } from "react-redux";
 import { addItem, saveItem } from "../store/cartSlice";
+import { AuthContext } from "../context/authContext";
 
 function Product({ id, images, title, price, discount, saved }) {
   const [isOpen, setIsOpen] = useState(false);
   const [save, onSave] = useState(saved);
   const dispatch = useDispatch();
+  const { userDetails } = useContext(AuthContext);
 
   const discountPrice = (price - price * (discount / 100)).toFixed(2);
 
@@ -18,6 +20,9 @@ function Product({ id, images, title, price, discount, saved }) {
   };
 
   const addToCardHandler = async function (image, title, price, id) {
+    if (userDetails?.docId) {
+      console.log(userDetails?.docId);
+    }
     dispatch(addItem({ title, price, qty: 1, id, image, discount }));
   };
 
