@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import ProductDetails from "./ProductDetails";
 import Overlay from "../../UI/Overlay";
 import { FiHeart } from "react-icons/fi";
 import classes from "./Product.module.scss";
 import { useDispatch } from "react-redux";
 import { addItem, saveItem } from "../store/cartSlice";
-import { addToCart } from "../firebase/service";
 
 function Product({ id, images, title, price, discount, saved }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,9 +17,7 @@ function Product({ id, images, title, price, discount, saved }) {
     setIsOpen(true);
   };
 
-  const addToCardHandler = function (image, title, price, id) {
-    //also add to firebase
-    addToCart(docId, title, price, 1, id, image, discount);
+  const addToCardHandler = async function (image, title, price, id) {
     dispatch(addItem({ title, price, qty: 1, id, image, discount }));
   };
 

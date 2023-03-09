@@ -6,16 +6,19 @@ import CartEmpty from "../images/cart-1.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/authContext";
 import Popup from "../../UI/Popup";
+import { orderItems } from "../firebase/service";
 
 function Cart() {
   const { cartItems, totalAmount } = useSelector((state) => state.cart);
 
   const navigate = useNavigate();
   const [popup, setPopup] = useState(false);
-  const { isLoggedIn } = useContext(AuthContext);
-  const orderHandler = function () {
+  const { isLoggedIn, userDetails } = useContext(AuthContext);
+  const orderHandler = async function () {
     if (isLoggedIn) {
-      //if user signed in place order
+      //if user signed in place order and add to firebase
+      //add to firebase
+      const data = await orderItems(userDetails.docId, cartItems);
       navigate("/order");
     } else {
       //not signed in redirect to login page

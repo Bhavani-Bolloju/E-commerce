@@ -15,17 +15,18 @@ function AllProducts() {
   // localStorage.setItem("products", JSON.stringify(data.products));
   const getData = JSON.parse(localStorage.getItem("products"));
   // console.log(getData);
-  const { savedItems } = useSelector((state) => state.cart);
+  const { savedItems } = useSelector((state) => state?.cart);
 
-  const filterIds = savedItems.map((item) => item.id);
+  const filterIds = savedItems?.map((item) => item?.id);
 
-  if (!getData) {
-    const storeData = localStorage.setItem(
-      "products",
-      JSON.stringify(data?.products)
-    );
-  }
+  // if (!getData) {
+  //   const storeData = localStorage.setItem(
+  //     "products",
+  //     JSON.stringify(data?.products)
+  //   );
+  // }
 
+  // console.log(data);
   const items = [];
 
   let lastCategory = null;

@@ -37,8 +37,8 @@ function SignupPage() {
 
         if (!loginUser) throw new Error("failed to login");
 
-        const token = loginUser.user.accessToken;
-        login(token);
+        const user = loginUser.user;
+        login(user);
 
         navigate("/");
       } catch (error) {
@@ -49,12 +49,14 @@ function SignupPage() {
       try {
         const res = await createUserWithEmailAndPassword(auth, email, password);
         const user = res.user;
-        console.log(user);
         if (!res) throw new Error("user already exists");
         const addData = await addDoc(collection(db, "users"), {
           uid: user.uid,
           fullname: fullname,
+          orderItems: [],
+          cart: [],
         });
+        login(user);
         fullnameRef.current.value = "";
         navigate("/");
       } catch (error) {
