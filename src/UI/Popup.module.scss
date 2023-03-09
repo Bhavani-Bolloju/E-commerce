@@ -1,0 +1,25 @@
+.popup {
+  position: absolute;
+  width: 40%;
+  margin: 0 auto;
+  background: #61767b;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 2rem;
+  text-align: center;
+  color: #e2e7e8;
+  border-radius: 0.3rem;
+  font-size: 1.4rem;
+
+  svg {
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+    color: #d9dfe0;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

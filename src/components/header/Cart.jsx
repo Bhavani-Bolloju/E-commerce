@@ -1,17 +1,26 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { useSelector } from "react-redux";
 import classes from "./Cart.module.scss";
 import CartItem from "./CartItem";
-import emptyCart from "../images/cart.png";
 import CartEmpty from "../images/cart-1.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/authContext";
+import Popup from "../../UI/Popup";
 
 function Cart() {
   const { cartItems, totalAmount } = useSelector((state) => state.cart);
 
+  const navigate = useNavigate();
+  const [popup, setPopup] = useState(false);
+  const { isLoggedIn } = useContext(AuthContext);
   const orderHandler = function () {
-    //if user signed in place order
-    //if not create user acccout and then allow user to place order
+    if (isLoggedIn) {
+      //if user signed in place order
+      navigate("/order");
+    } else {
+      //not signed in redirect to login page
+      setPopup(true);
+    }
   };
 
   return (
@@ -39,6 +48,15 @@ function Cart() {
             </div>
           </div>
         </div>
+      )}
+      {popup && (
+        <Popup onClose={setPopup}>
+          Please{" "}
+          <Link className={classes.login} to="/login">
+            login{" "}
+          </Link>
+          to place an order
+        </Popup>
       )}
     </div>
   );

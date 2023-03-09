@@ -8,7 +8,6 @@ export const AuthContext = createContext({
 
 const AuthContextProvider = function (props) {
   const getToken = JSON.parse(localStorage.getItem("userToken"));
-  console.log(getToken);
 
   const [userToken, setUserToken] = useState(getToken);
 

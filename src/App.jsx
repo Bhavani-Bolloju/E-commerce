@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import CartPage from "./components/pages/CartPage";
 import Cart from "./components/header/Cart";
 import LoginPage from "./components/pages/LoginPage";
+import PlaceOrderPage from "./components/pages/PlaceOrderPage";
 import AuthContextProvider from "./components/context/authContext";
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path="savedItems" element={<SavedItems />}></Route>
         </Route>
         <Route path="/login" element={<LoginPage />}></Route>
+        <Route path="/order" element={<PlaceOrderPage />}></Route>
       </Routes>
     </AuthContextProvider>
   );
