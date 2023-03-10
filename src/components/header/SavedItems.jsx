@@ -1,11 +1,16 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useContext, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import classes from "./SavedItems.module.scss";
 import SavedItem from "./SavedItem";
+import { AuthContext } from "../context/authContext";
+import { fetchSavedItems } from "../store/cartActions";
+import { sendSavedItems } from "../store/cartActions";
 
 function SavedItems() {
   const { savedItems } = useSelector((state) => state.cart);
-  console.log(savedItems);
+  const { userDetails } = useContext(AuthContext);
+  const dispatch = useDispatch();
+  // console.log(savedItems);
 
   return (
     <div>

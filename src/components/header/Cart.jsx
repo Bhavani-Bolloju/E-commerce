@@ -16,13 +16,10 @@ function Cart() {
   const { isLoggedIn, userDetails } = useContext(AuthContext);
   const orderHandler = async function () {
     if (isLoggedIn) {
-      //if user signed in place order and add to firebase
-      //add to firebase
-      const data = await orderItems(userDetails.docId, cartItems);
-      navigate("/order");
+      // const data = await orderItems(userDetails.docId, cartItems);
+      // navigate("/order");
     } else {
-      //not signed in redirect to login page
-      setPopup(true);
+      // setPopup(true);
     }
   };
 
@@ -46,9 +43,7 @@ function Cart() {
           <button onClick={orderHandler}>Order Now</button>
           <div className={classes.totalAmount}>
             <div className={classes.title}>Total Price:</div>
-            <div className={classes.price}>
-              ${Math.abs(+totalAmount).toFixed(2)}
-            </div>
+            <div className={classes.price}>${Math.abs(+totalAmount)}</div>
           </div>
         </div>
       )}

@@ -11,11 +11,21 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
+    addFetchData: (state, action) => {
+      state.cartItems = action.payload.cartItems;
+      state.totalAmount = +action.payload.totalAmount;
+    },
+    addFetchSavedItems: (state, action) => {
+      state.savedItems = action.payload;
+    },
     addItem: (state, action) => {
       const items = [...state.cartItems];
       const index = items.findIndex((item) => item.id == action.payload.id);
       const item = items[index];
-      state.totalAmount += +action.payload.price * +action.payload.qty;
+      const totalAmount =
+        state.totalAmount + +action.payload.price * +action.payload.qty;
+      state.totalAmount = +totalAmount.toFixed(2);
+
       if (index >= 0) {
         const updateItem = {
           ...item,
@@ -30,13 +40,12 @@ const cartSlice = createSlice({
       const items = [...state.cartItems];
       const index = items.findIndex((item) => item.id === action.payload);
       const item = items[index];
-      state.totalAmount -= item.price;
+      state.totalAmount = +(state.totalAmount - item.price).toFixed(2);
 
       if (item.qty <= 1) {
         const filteredItems = items.filter(
           (item) => item.id !== action.payload
         );
-        // console.log(filteredItems);
         state.cartItems = filteredItems;
       } else {
         const updatedItem = { ...item, qty: +item.qty - 1 };
@@ -68,7 +77,14 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addItem, removeItem, saveItem, removeSavedItem, loggedUser } =
-  cartSlice.actions;
+export const {
+  addItem,
+  removeItem,
+  saveItem,
+  removeSavedItem,
+  loggedUser,
+  addFetchData,
+  addFetchSavedItems,
+} = cartSlice.actions;
 
 export default cartSlice.reducer;

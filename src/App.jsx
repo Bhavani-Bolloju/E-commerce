@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Header from "./components/header/Header";
 import MainPage from "./components/pages/MainPage";
 import { Navigate, Route, Routes } from "react-router-dom";
@@ -7,12 +7,42 @@ import CartPage from "./components/pages/CartPage";
 import Cart from "./components/header/Cart";
 import LoginPage from "./components/pages/LoginPage";
 import PlaceOrderPage from "./components/pages/PlaceOrderPage";
-import AuthContextProvider, {
-  AuthContext,
-} from "./components/context/authContext";
+import { AuthContext } from "./components/context/authContext";
+import { useDispatch, useSelector } from "react-redux";
+import { sendCartData, sendSavedItems } from "./components/store/cartActions";
+import { fetchCartData, fetchSavedItems } from "./components/store/cartActions";
 
 function App() {
-  const { isLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn, userDetails } = useContext(AuthContext);
+  const { cartItems, totalAmount, savedItems } = useSelector(
+    (state) => state.cart
+  );
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (userDetails) {
+      dispatch(fetchCartData(userDetails?.uid));
+    }
+  }, [userDetails?.uid]);
+
+  useEffect(() => {
+    if (userDetails?.docId && cartItems && cartItems.length !== 0) {
+      dispatch(sendCartData(userDetails?.docId, cartItems, totalAmount));
+    }
+  }, [userDetails?.docId, cartItems, totalAmount]);
+
+  useEffect(() => {
+    if (userDetails?.uid) {
+      dispatch(fetchSavedItems(userDetails?.uid));
+    }
+  }, [userDetails?.uid]);
+
+  useEffect(() => {
+    if (savedItems.length !== 0 && userDetails?.docId) {
+      dispatch(sendSavedItems(userDetails?.docId, savedItems));
+    }
+  }, [savedItems, userDetails?.docId]);
 
   return (
     <>
