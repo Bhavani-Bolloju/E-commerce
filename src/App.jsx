@@ -18,6 +18,7 @@ function App() {
     (state) => state.cart
   );
 
+  console.log(cartItems);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -60,7 +61,13 @@ function App() {
         ></Route>
         <Route
           path="/order"
-          element={isLoggedIn ? <PlaceOrderPage /> : <Navigate to="/login" />}
+          element={
+            isLoggedIn && cartItems.length !== 0 ? (
+              <PlaceOrderPage />
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
         ></Route>
       </Routes>
     </>

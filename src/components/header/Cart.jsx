@@ -17,9 +17,11 @@ function Cart() {
   const orderHandler = async function () {
     if (isLoggedIn) {
       // const data = await orderItems(userDetails.docId, cartItems);
-      // navigate("/order");
+      navigate("/order");
+      console.log("logged /confirm address / and place order");
     } else {
-      // setPopup(true);
+      console.log("redirect to login page");
+      setPopup(true);
     }
   };
 

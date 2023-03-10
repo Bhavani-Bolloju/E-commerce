@@ -74,6 +74,10 @@ const cartSlice = createSlice({
       console.log(action.payload);
       state.user = action.payload;
     },
+    orderConfirmed: (state, action) => {
+      state.cartItems = [];
+      state.totalAmount = 0;
+    },
   },
 });
 
@@ -85,6 +89,7 @@ export const {
   loggedUser,
   addFetchData,
   addFetchSavedItems,
+  orderConfirmed,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

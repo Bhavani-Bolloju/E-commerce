@@ -2,14 +2,14 @@ import React, { useContext, useState } from "react";
 import classes from "./OrderAddress.module.scss";
 import { addAddress } from "../firebase/service";
 import { AuthContext } from "../context/authContext";
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { orderConfirmed } from "../store/cartSlice";
+import { sendCartData } from "../store/cartActions";
 
 function OrderAddress() {
   const [confirmOrder, setConfirmOrder] = useState(false);
   const { userDetails } = useContext(AuthContext);
-  const { totalAmount, cartItems } = useSelector((state) => state.cart);
-
-  // const { street, city, pincode, state } = userDetails?.address;
+  const dispatch = useDispatch();
 
   const submitFormHandler = async function (e) {
     e.preventDefault();
@@ -21,35 +21,15 @@ function OrderAddress() {
       state: state.value,
     });
     e.target.reset();
+    setConfirmOrder(true);
+    //clear cart
+    dispatch(orderConfirmed());
+    dispatch(sendCartData(userDetails?.docId, [], 0));
   };
 
   return (
     <div className={classes["address"]}>
-      {userDetails?.address && (
-        <div className={classes.orderConfirm}>
-          <div>
-            <span>Order will be delivered to: </span>
-            <span>{`${street}, ${city},${state}, ${pincode}. `}</span>
-          </div>
-
-          <div>
-            <span>Items:</span>
-            <span>{cartItems.length}</span>
-          </div>
-          <div>
-            <span>Total Amount:</span>
-            <span>${+totalAmount.toFixed(2)}</span>
-          </div>
-          <button
-            onClick={() => {
-              setConfirmOrder(true);
-            }}
-          >
-            Confirm order
-          </button>
-        </div>
-      )}
-      {!userDetails?.address && (
+      {!confirmOrder && (
         <div>
           <h3>Enter Delivery Address</h3>
           <form onSubmit={submitFormHandler}>
@@ -83,7 +63,11 @@ function OrderAddress() {
           </form>
         </div>
       )}
-      {confirmOrder && <p>Your order is placed! Thanks for shopping :)</p>}
+      {confirmOrder && (
+        <p className={classes.confirmed}>
+          Your order is placed! Thanks for shopping :)
+        </p>
+      )}
     </div>
   );
 }
