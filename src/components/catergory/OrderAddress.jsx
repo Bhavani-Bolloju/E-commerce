@@ -1,15 +1,18 @@
 import React, { useContext, useState } from "react";
 import classes from "./OrderAddress.module.scss";
-import { addAddress } from "../firebase/service";
+import { addAddress, orderItems } from "../firebase/service";
 import { AuthContext } from "../context/authContext";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { orderConfirmed } from "../store/cartSlice";
 import { sendCartData } from "../store/cartActions";
 
 function OrderAddress() {
   const [confirmOrder, setConfirmOrder] = useState(false);
+  const { cartItems } = useSelector((state) => state.cart);
   const { userDetails } = useContext(AuthContext);
   const dispatch = useDispatch();
+
+  // console.log(cartItems);
 
   const submitFormHandler = async function (e) {
     e.preventDefault();
@@ -20,11 +23,9 @@ function OrderAddress() {
       pincode: pincode.value,
       state: state.value,
     });
-    e.target.reset();
     setConfirmOrder(true);
-    //clear cart
+    await orderItems(userDetails?.docId, cartItems);
     dispatch(orderConfirmed());
-    dispatch(sendCartData(userDetails?.docId, [], 0));
   };
 
   return (

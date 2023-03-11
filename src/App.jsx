@@ -14,11 +14,10 @@ import { fetchCartData, fetchSavedItems } from "./components/store/cartActions";
 
 function App() {
   const { isLoggedIn, userDetails } = useContext(AuthContext);
-  const { cartItems, totalAmount, savedItems } = useSelector(
+  const { cartItems, totalAmount, savedItems, status } = useSelector(
     (state) => state.cart
   );
 
-  console.log(cartItems);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -28,10 +27,10 @@ function App() {
   }, [userDetails?.uid]);
 
   useEffect(() => {
-    if (userDetails?.docId && cartItems && cartItems.length !== 0) {
+    if (userDetails?.docId && cartItems && status) {
       dispatch(sendCartData(userDetails?.docId, cartItems, totalAmount));
     }
-  }, [userDetails?.docId, cartItems, totalAmount]);
+  }, [userDetails?.docId, cartItems, totalAmount, status]);
 
   useEffect(() => {
     if (userDetails?.uid) {
@@ -40,10 +39,10 @@ function App() {
   }, [userDetails?.uid]);
 
   useEffect(() => {
-    if (savedItems.length !== 0 && userDetails?.docId) {
+    if (status && userDetails?.docId) {
       dispatch(sendSavedItems(userDetails?.docId, savedItems));
     }
-  }, [savedItems, userDetails?.docId]);
+  }, [savedItems, userDetails?.docId, status]);
 
   return (
     <>

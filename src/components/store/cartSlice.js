@@ -5,6 +5,7 @@ const initialState = {
   totalAmount: 0,
   savedItems: [],
   user: null,
+  status: false,
 };
 
 const cartSlice = createSlice({
@@ -12,13 +13,16 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addFetchData: (state, action) => {
+      state.status = false;
       state.cartItems = action.payload.cartItems;
       state.totalAmount = +action.payload.totalAmount;
     },
     addFetchSavedItems: (state, action) => {
+      state.status = false;
       state.savedItems = action.payload;
     },
     addItem: (state, action) => {
+      state.status = true;
       const items = [...state.cartItems];
       const index = items.findIndex((item) => item.id == action.payload.id);
       const item = items[index];
@@ -37,6 +41,7 @@ const cartSlice = createSlice({
       }
     },
     removeItem: (state, action) => {
+      state.status = true;
       const items = [...state.cartItems];
       const index = items.findIndex((item) => item.id === action.payload);
       const item = items[index];
@@ -53,6 +58,7 @@ const cartSlice = createSlice({
       }
     },
     saveItem: (state, action) => {
+      state.status = true;
       const items = [...state.savedItems];
       const index = items.findIndex((item) => item.id === action.payload.id);
 
@@ -66,6 +72,7 @@ const cartSlice = createSlice({
       }
     },
     removeSavedItem: (state, action) => {
+      state.status = true;
       const items = [...state.savedItems];
       const filterItems = items.filter((item) => item.id !== action.payload);
       state.savedItems = filterItems;

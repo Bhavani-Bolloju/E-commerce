@@ -34,9 +34,10 @@ export const savedItems = async function (docId, saved) {
 export const orderItems = async function (docId, cart) {
   const data = doc(db, "users", docId);
   await updateDoc(data, {
-    orderItems: cart,
+    orderItems: arrayUnion({ cart, date: Date.now() }),
   });
 };
+
 export const addAddress = async function (docId, address) {
   const data = doc(db, "users", docId);
   await updateDoc(data, {
