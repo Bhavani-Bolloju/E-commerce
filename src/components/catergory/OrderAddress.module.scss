@@ -1,11 +1,13 @@
 .address {
   width: 50%;
   margin: 2rem auto;
-  min-width: 60rem;
-  // background-color: #f5f7f7;
+  min-width: 50rem;
+
+  @media screen and (max-width: 750px) {
+    width: 100%;
+  }
 
   .orderConfirm {
-    display: grid;
     grid-auto-flow: row;
     gap: 1rem;
     background-color: #f5f7f7;
@@ -40,6 +42,10 @@
     gap: 2rem;
     box-shadow: 0 1px 20px 10px rgba(0, 0, 0, 0.02);
 
+    @media screen and (max-width: 750px) {
+      width: 80%;
+      margin: auto;
+    }
     label {
       font-size: 1.4rem;
     }

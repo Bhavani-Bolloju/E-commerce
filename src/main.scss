@@ -22,17 +22,26 @@ body {
   position: relative;
   height: 100vh;
   padding: 0rem 5rem;
+
+  @media screen and (max-width: 750px) {
+    padding: 0rem 1rem;
+  }
 }
 
 .cartPage {
   width: 50%;
-  min-width: 60rem;
+  min-width: 50rem;
   height: 80vh;
   margin: 2rem auto;
   background-color: #e2e7e8;
   padding: 2rem;
   border-radius: 0.5rem;
   box-shadow: 0px 5px 20px 20px rgba(0, 0, 0, 0.03);
+
+  @media screen and (max-width: 750px) {
+    min-width: 40rem;
+    padding: 0;
+  }
 }
 
 .cart-headings {

@@ -13,11 +13,11 @@ function SavedItems() {
   // console.log(savedItems);
 
   return (
-    <div>
+    <div className={classes["saved-items"]}>
       {savedItems && savedItems.length <= 0 ? (
         <p className={classes.empty}>No item saved</p>
       ) : (
-        <ul className={classes["saved-items"]}>
+        <ul>
           {savedItems?.map((item) => (
             <SavedItem
               key={item.id}

@@ -1,6 +1,6 @@
 .heroSection {
   background-color: #bbc7cb;
-  background-color: #f5f7f7;
+  // background-color: #f5f7f7;
 
   .container {
     display: grid;
@@ -10,6 +10,10 @@
     width: 70%;
     gap: 4rem;
     margin: 0 auto;
+    @media screen and (max-width: 950px) {
+      gap: 2rem;
+      width: 80%;
+    }
 
     img {
       width: 100%;
@@ -20,12 +24,20 @@
 
   h1 {
     font-size: 5.2rem;
-    // font-size: 5rem;
     line-height: 1;
-    // line-height: 1;
     letter-spacing: -0.2rem;
     margin-bottom: 2rem;
-    // font-weight: lighte;
+    font-weight: 600;
+
+    @media screen and (max-width: 1200px) {
+      font-size: 4rem;
+    }
+    @media screen and (max-width: 950px) {
+      font-size: 3rem;
+    }
+    @media screen and (max-width: 750px) {
+      font-size: 2.5rem;
+    }
   }
   p {
     font-size: 2rem;

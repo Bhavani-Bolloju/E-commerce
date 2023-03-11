@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 import { AuthContext } from "../context/authContext";
+import cart from "../images/header-cart.svg";
 
 function Header() {
   const navigate = useNavigate();
@@ -35,7 +36,8 @@ function Header() {
             navigate("/");
           }}
         >
-          Your shop
+          {/* <img src={cart} alt="cart" /> */}
+          <span>shop cart</span>
         </h1>
         <div className={classes["header-btns"]}>
           <div className={classes.user}>
