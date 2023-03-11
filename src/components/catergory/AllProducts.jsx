@@ -9,30 +9,22 @@ const ProductCategory = function ({ category }) {
 };
 
 function AllProducts() {
-  // const { data, error, loading } = useFetch("products");
+  const { data, error, loading } = useFetch("products");
 
-  // console.log(data);
-  // localStorage.setItem("products", JSON.stringify(data.products));
-  const getData = JSON.parse(localStorage.getItem("products"));
-  // console.log(getData);
-  const { savedItems } = useSelector((state) => state?.cart);
+  const savedItems = useSelector((state) => state?.cart);
 
-  const filterIds = savedItems?.map((item) => item?.id);
+  let filterIds = [];
 
-  // if (!getData) {
-  //   const storeData = localStorage.setItem(
-  //     "products",
-  //     JSON.stringify(data?.products)
-  //   );
-  // }
+  if (savedItems.length > 0) {
+    filterIds = savedItems.length > 0 && savedItems.map((item) => item?.id);
+  }
 
-  // console.log(data);
   const items = [];
 
   let lastCategory = null;
 
-  getData &&
-    getData.forEach((product) => {
+  data?.products &&
+    data?.products.forEach((product) => {
       if (product.category !== lastCategory) {
         items.push(
           <ProductCategory category={product.category} key={product.category} />

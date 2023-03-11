@@ -51,10 +51,13 @@ function SignupPage() {
         const user = res.user;
         if (!res) throw new Error("user already exists");
         const addData = await addDoc(collection(db, "users"), {
-          uid: user.uid,
+          address: {},
+          cart: [],
           fullname: fullname,
           orderItems: [],
-          cart: [],
+          savedItems: [],
+          totalAmount: 0,
+          uid: user.uid,
         });
         login(user);
         fullnameRef.current.value = "";
