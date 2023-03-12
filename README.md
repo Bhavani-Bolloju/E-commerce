@@ -10,7 +10,7 @@
 
 #### --> HOME PAGE
 
-<img src="https://user-images.githubusercontent.com/100474477/224481033-74de7e77-d4fb-4559-81f3-b7fbdc723d93.png" width='800px' height="500px"/>
+<img src="https://user-images.githubusercontent.com/100474477/224481033-74de7e77-d4fb-4559-81f3-b7fbdc723d93.png" width='800px' height="800px"/>
 
 #### ---> CART
 
