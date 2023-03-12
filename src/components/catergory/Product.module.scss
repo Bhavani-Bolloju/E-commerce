@@ -14,8 +14,8 @@
   @media screen and (max-width: 950px) {
     width: 18rem;
   }
-  @media screen and (max-width: 650px) {
-    width: 15rem;
+  @media screen and (max-width: 500px) {
+    width: 70%;
   }
 
   .img {
@@ -26,7 +26,7 @@
       height: 12rem;
     }
     @media screen and (max-width: 650px) {
-      height: 8rem;
+      height: 15rem;
     }
   }
 
