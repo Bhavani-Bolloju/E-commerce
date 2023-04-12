@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useContext } from "react";
-import classes from "./Header.module.scss";
+import classes from "./HeaderNav.module.scss";
 import { BsCart4 } from "react-icons/bs";
 import { CiUser } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";

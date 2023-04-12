@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import Header from "./components/header/Header";
+import Header from "./components/header/HeaderNav";
 import MainPage from "./components/pages/MainPage";
 import { Navigate, Route, Routes } from "react-router-dom";
 import SavedItems from "./components/header/SavedItems";
