@@ -3,14 +3,19 @@ import classes from "./AllProducts.module.scss";
 import useFetch from "../hooks/use-fetch";
 import Product from "./Product";
 import { useSelector } from "react-redux";
+import { useState } from "react";
+import FilterProducts from "./FilterProducts";
 
 const ProductCategory = function ({ category }) {
   return <h2 className={classes.heading}>{category}</h2>;
 };
 
 function AllProducts() {
-  const { data, error, loading } = useFetch("products");
 
+  const [filterCtgy, setFilterCtgy] = useState('all');
+  const [filterCtgyList, setFilterCtgyList] = useState([])
+  const { data, error, loading } = useFetch("products");
+ 
   const savedItems = useSelector((state) => state?.cart);
 
   let filterIds = [];
@@ -43,10 +48,44 @@ function AllProducts() {
       );
       lastCategory = product.category;
     });
+  
+  const filterProductHandler =async function (e) {
+    setFilterCtgy(e.target.value)
+    if (e.target.value === 'all') {
+      return;
+    };
+    const fetchData = await fetch(`https://dummyjson.com/products/category/${e.target.value}`)
+    const res = await fetchData.json();
+    setFilterCtgyList(res.products);
+  }
+
+  let productList = data;
+
+  if (filterCtgy === 'all') {
+    productList = data?.products;
+  } else {
+    productList = filterCtgyList
+  }
+
 
   return (
-    <div>
-      <ul className={classes.products}>{items}</ul>
+    <div className={classes.productContainer}>
+      <FilterProducts onFilter={filterProductHandler } />
+
+    {filterCtgy === 'all' ?  <ul className={classes.products}>{ items
+ 
+    }</ul> : <ul className={classes.products}>
+          <ProductCategory category={ filterCtgy} />
+          { filterCtgyList.map(product =>  <Product
+          key={product.id}
+          images={product.images}
+          title={product.title}
+          id={product.id}
+          price={product.price}
+          saved={filterIds.includes(product.id)}
+          discount={product.discountPercentage}
+        />  ) }
+        </ul>}
     </div>
   );
 }

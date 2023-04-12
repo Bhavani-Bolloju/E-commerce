@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
-import ProductDetails from "./ProductDetails";
-import Overlay from "../../UI/Overlay";
+import { useNavigate } from "react-router-dom";
 import { FiHeart } from "react-icons/fi";
 import classes from "./Product.module.scss";
 import { useDispatch } from "react-redux";
@@ -8,16 +7,13 @@ import { addItem, saveItem } from "../store/cartSlice";
 import { AuthContext } from "../context/authContext";
 
 function Product({ id, images, title, price, discount, saved }) {
-  const [isOpen, setIsOpen] = useState(false);
+
   const [save, onSave] = useState(saved);
   const dispatch = useDispatch();
   const { userDetails } = useContext(AuthContext);
 
   const discountPrice = (price - price * (discount / 100)).toFixed(2);
-
-  const detailProductHandler = function () {
-    setIsOpen(true);
-  };
+  const navigate = useNavigate();
 
   const addToCardHandler = async function (image, title, price, id) {
     if (userDetails?.docId) {
@@ -32,8 +28,7 @@ function Product({ id, images, title, price, discount, saved }) {
   };
 
   return (
-    <>
-      <li key={id} className={classes.product} onClick={detailProductHandler}>
+      <li key={id} className={classes.product} onClick={()=>{ navigate(`/${id}`) }}>
         <div className={classes.img}>
           <img src={images[0]} alt={title} />
         </div>
@@ -60,10 +55,8 @@ function Product({ id, images, title, price, discount, saved }) {
             saveItemHandler(title, price, id, images[0], discount);
           }}
         />
-      </li>
-      {isOpen && <ProductDetails productId={id} onClose={setIsOpen} />}
-      {isOpen && <Overlay onClose={setIsOpen} />}
-    </>
+       </li>
+ 
   );
 }
 

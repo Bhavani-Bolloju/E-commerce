@@ -4,6 +4,7 @@ import MainPage from "./components/pages/MainPage";
 import { Navigate, Route, Routes } from "react-router-dom";
 import SavedItems from "./components/header/SavedItems";
 import CartPage from "./components/pages/CartPage";
+import ProductDetailPage from "./components/pages/ProductDetailPage";
 import Cart from "./components/header/Cart";
 import LoginPage from "./components/pages/LoginPage";
 import PlaceOrderPage from "./components/pages/PlaceOrderPage";
@@ -49,6 +50,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<MainPage />} />
+        <Route path="/:productId" element={<ProductDetailPage />} />
         <Route path="/cart" element={<CartPage />}>
           <Route index element={<Cart />}></Route>
           <Route path="cartItems" element={<Cart />}></Route>

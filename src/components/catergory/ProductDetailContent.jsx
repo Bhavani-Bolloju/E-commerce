@@ -6,12 +6,12 @@ import { useDispatch } from "react-redux";
 function ProductDetailContent({
   title,
   description,
-  totalRating,
   discount,
   price,
   stock,
   id,
   image,
+  rating
 }) {
   const [count, setCount] = useState(1);
 
@@ -30,11 +30,16 @@ function ProductDetailContent({
     dispatch(addItem({ title, price, qty: count, id, image, discount }));
   };
 
+  // console.log(, 'rating')
+
   return (
     <div>
       <h4 className={classes["product__title"]}>{title}</h4>
       <p className={classes["product__description"]}>{description}</p>
-      <div className={classes["product__rating"]}>{totalRating}</div>
+      <div className={classes["product__rating"]}>
+        <span>{rating.toFixed(1)}</span>
+        <span>rating:</span>
+      </div>
       <div className={classes["product__discount-price"]}>
         <span className={classes["product__discount"]}>(-{discount}%)</span>
         <span className={classes["product__price"]}>

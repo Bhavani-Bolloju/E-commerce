@@ -2,7 +2,6 @@ import React, { useRef, useState } from "react";
 import classes from "./ProductDetails.module.scss";
 import useFetch from "../hooks/use-fetch";
 import { RiCloseCircleLine } from "react-icons/ri";
-import { ImStarFull, ImStarHalf, ImStarEmpty } from "react-icons/im";
 import ProductDetailContent from "./ProductDetailContent";
 
 function ProductDetails({ productId, onClose }) {
@@ -12,27 +11,7 @@ function ProductDetails({ productId, onClose }) {
   const imageRef = useRef(null);
   const myRef = useRef(null);
 
-  const totalRating = [];
-
-  let rating = data?.rating;
-  for (let i = 0; i < 5; i++) {
-    rating -= 1;
-    const rate = Math.floor(rating);
-
-    if (rate === 0) {
-      totalRating.push(
-        <ImStarHalf key={i} className={classes["product__rate"]} />
-      );
-    }
-    if (rate < 0) {
-      totalRating.push(<ImStarEmpty key={i} className={classes.half} />);
-    }
-    if (rate > 0) {
-      totalRating.push(
-        <ImStarFull key={i} className={classes["product__rate"]} />
-      );
-    }
-  }
+ 
 
   const imageHandler = function (id, e) {
     setSelectedImage(e.target.src);
@@ -74,10 +53,10 @@ function ProductDetails({ productId, onClose }) {
         <ProductDetailContent
           title={data?.title}
           description={data?.description}
-          totalRating={totalRating}
           discount={data?.discountPercentage}
           price={data?.price}
           stock={data?.stock}
+          rating = {data?.rating}
           id={data?.id}
           image={data?.images?.[0]}
         />

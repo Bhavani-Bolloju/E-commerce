@@ -10,10 +10,15 @@
 
   &__rating {
     display: flex;
+    flex-direction: row-reverse;
     gap: 0.2rem;
-    margin-top: 1.5rem;
+    margin-top: 0.5rem;
     padding-bottom: 1.8rem;
     border-bottom: 1px solid #afb3b454;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    font-size: 1.2rem;
+    text-transform: capitalize;
   }
 
   &__rate {
