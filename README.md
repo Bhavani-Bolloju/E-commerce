@@ -1,14 +1,16 @@
 # E-commerce website -- shop-cart
 
 ## what is it about?
+--> An e-commerce website allows users to shop online by adding items to a cart, saving items, and placing orders. Used firebase as backend to store data and for user authentication.
 
 ## How did i do it?
+--> Built project using vite, react js, react-router , sass as preprocessor, redux-toolkit, context API, and dummy backend to fetch product details.
 
 ### project screenshot
 
 #### --> HOME PAGE
 
-<img src="https://user-images.githubusercontent.com/100474477/224481033-74de7e77-d4fb-4559-81f3-b7fbdc723d93.png" width='800px' height="500px"/>
+<img src="https://user-images.githubusercontent.com/100474477/224481033-74de7e77-d4fb-4559-81f3-b7fbdc723d93.png" width='800px' height="800px"/>
 
 #### ---> CART
 
