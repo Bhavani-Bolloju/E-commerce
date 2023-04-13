@@ -41,9 +41,6 @@
     margin-right: 1rem;
   }
 
-  &__price {
-  }
-
   &__items {
     display: flex;
     margin: 1rem 0;
@@ -88,15 +85,16 @@
 }
 .cart-btn {
   margin: 3rem 0;
-  background-color: #a9bbbb;
+  background: transparent;
   border: none;
   color: #445454;
   font-weight: 700;
   padding: 0.8rem 1.8rem;
-  border-radius: 5rem;
+  border-radius: 0.5rem;
   text-align: center;
+  border: 1px solid #445454;
   &:hover {
     cursor: pointer;
-    background-color: #a9bbbbe0;
+    background-color: #edeeee6f;
   }
 }

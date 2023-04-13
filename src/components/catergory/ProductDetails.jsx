@@ -4,14 +4,13 @@ import useFetch from "../hooks/use-fetch";
 import { RiCloseCircleLine } from "react-icons/ri";
 import ProductDetailContent from "./ProductDetailContent";
 
-function ProductDetails({ productId, onClose }) {
+function ProductDetails({ productId }) {
   const { data, isLoading, error } = useFetch(`products/${productId}`);
   const [selected, setSelected] = useState(0);
   const [selectedImage, setSelectedImage] = useState(data?.images?.[0]);
   const imageRef = useRef(null);
   const myRef = useRef(null);
 
- 
 
   const imageHandler = function (id, e) {
     setSelectedImage(e.target.src);
@@ -20,10 +19,7 @@ function ProductDetails({ productId, onClose }) {
 
   return (
     <div className={classes["product-details"]}>
-      <RiCloseCircleLine
-        className={classes.close}
-        onClick={() => onClose(false)}
-      />
+     
       {data && (
         <div className={classes["images-container"]}>
           <div className={classes["display-image"]}>
