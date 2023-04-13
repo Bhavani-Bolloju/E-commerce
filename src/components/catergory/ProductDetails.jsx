@@ -1,8 +1,9 @@
 import React, { useRef, useState } from "react";
 import classes from "./ProductDetails.module.scss";
 import useFetch from "../hooks/use-fetch";
-import { RiCloseCircleLine } from "react-icons/ri";
+import { IoIosArrowRoundBack } from "react-icons/io";
 import ProductDetailContent from "./ProductDetailContent";
+import { useNavigate } from "react-router-dom";
 
 function ProductDetails({ productId }) {
   const { data, isLoading, error } = useFetch(`products/${productId}`);
@@ -10,6 +11,8 @@ function ProductDetails({ productId }) {
   const [selectedImage, setSelectedImage] = useState(data?.images?.[0]);
   const imageRef = useRef(null);
   const myRef = useRef(null);
+
+  const navigate = useNavigate()
 
 
   const imageHandler = function (id, e) {
@@ -19,7 +22,11 @@ function ProductDetails({ productId }) {
 
   return (
     <div className={classes["product-details"]}>
-     
+      <IoIosArrowRoundBack
+        onClick={() => 
+        navigate('/')
+        }
+      />
       {data && (
         <div className={classes["images-container"]}>
           <div className={classes["display-image"]}>

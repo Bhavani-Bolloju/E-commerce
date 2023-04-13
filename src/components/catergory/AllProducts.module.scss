@@ -18,6 +18,9 @@
     column-gap: 2rem;
     padding: 2rem 0;
   }
+  @media screen and (max-width: 650px) {
+    justify-content: center;
+  }
 }
 
 .heading {

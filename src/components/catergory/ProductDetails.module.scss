@@ -13,6 +13,19 @@
   margin: 5rem auto;
   border: 1px solid #d9dfe0;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  position: relative;
+
+  svg {
+    position: absolute;
+    left: -8rem;
+    top: -3rem;
+    width: 3.5rem;
+    height: 3.5rem;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
 
   @media screen and (max-width: 1200px) {
     width: 80%;
