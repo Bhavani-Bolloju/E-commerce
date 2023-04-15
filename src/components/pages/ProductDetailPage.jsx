@@ -3,8 +3,7 @@ import { useParams } from 'react-router-dom';
 import ProductDetails from '../catergory/ProductDetails';
 
 function ProductDetailPage() {
- const params =  useParams()
-console.log(params.productId)
+  const params = useParams();
 
   return (
     <ProductDetails productId={params.productId}/>

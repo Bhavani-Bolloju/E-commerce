@@ -1,6 +1,6 @@
 .popup {
   position: absolute;
-  width: 40%;
+  width: 500px;
   margin: 0 auto;
   background: #61767b;
   top: 20%;
@@ -11,6 +11,10 @@
   color: #e2e7e8;
   border-radius: 0.3rem;
   font-size: 1.4rem;
+
+  @media screen and (max-width: 650px) {
+    width: 200px;
+  }
 
   svg {
     position: absolute;

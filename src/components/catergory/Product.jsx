@@ -1,17 +1,18 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FiHeart } from "react-icons/fi";
 import classes from "./Product.module.scss";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addItem, saveItem } from "../store/cartSlice";
 import { AuthContext } from "../context/authContext";
 
-function Product({ id, images, title, price, discount, saved }) {
 
-  const [save, onSave] = useState(saved);
-  const dispatch = useDispatch();
+function Product({ id, images, title, price, discount, saved , onNotify}) {
   const { userDetails } = useContext(AuthContext);
-
+  const dispatch = useDispatch();
+  // const { cartNotification } = useSelector(state => state.cart);
+  const [save, onSave] = useState(saved);
+  
   const discountPrice = (price - price * (discount / 100)).toFixed(2);
   const navigate = useNavigate();
 
@@ -26,8 +27,11 @@ function Product({ id, images, title, price, discount, saved }) {
     onSave((prev) => !prev);
     dispatch(saveItem({ title, price, id, image, discount }));
   };
+ 
+
 
   return (
+    <>
       <li key={id} className={classes.product} onClick={()=>{ navigate(`/${id}`) }}>
         <div className={classes.img}>
           <img src={images[0]} alt={title} />
@@ -43,8 +47,9 @@ function Product({ id, images, title, price, discount, saved }) {
             onClick={(e) => {
               e.stopPropagation();
               addToCardHandler(images[0], title, discountPrice, id, discount);
+              onNotify();
             }}
-          >
+            >
             Add to cart
           </button>
         </div>
@@ -54,8 +59,10 @@ function Product({ id, images, title, price, discount, saved }) {
             e.stopPropagation();
             saveItemHandler(title, price, id, images[0], discount);
           }}
-        />
-       </li>
+          />
+      </li>
+     
+    </>
  
   );
 }

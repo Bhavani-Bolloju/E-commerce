@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import classes from "./ProductDetailContent.module.scss";
-import { addItem } from "../store/cartSlice";
+import { addItem, confirmAdd } from "../store/cartSlice";
 import { useDispatch } from "react-redux";
 
 function ProductDetailContent({
@@ -30,7 +30,6 @@ function ProductDetailContent({
     dispatch(addItem({ title, price, qty: count, id, image, discount }));
   };
 
-  // console.log(, 'rating')
 
   return (
     <div>
@@ -78,7 +77,11 @@ function ProductDetailContent({
         </span>
       </div>
       <div className={classes["btns"]}>
-        <button className={classes["cart-btn"]} onClick={addToCartHandler}>
+        <button className={classes["cart-btn"]} onClick={() => {
+          addToCartHandler();
+          dispatch(confirmAdd());
+          console.log('added')
+        }}>
           Add to cart
         </button>
       </div>

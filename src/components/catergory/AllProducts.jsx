@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import classes from "./AllProducts.module.scss";
 import useFetch from "../hooks/use-fetch";
 import Product from "./Product";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import FilterProducts from "./FilterProducts";
+
+import { confirmAdd } from "../store/cartSlice";
 
 const ProductCategory = function ({ category }) {
   return <h2 className={classes.heading}>{category}</h2>;
@@ -16,7 +18,15 @@ function AllProducts() {
   const [filterCtgyList, setFilterCtgyList] = useState([])
   const { data, error, loading } = useFetch("products");
  
-  const savedItems = useSelector((state) => state?.cart);
+  const {savedItems, cartNotification} = useSelector((state) => state?.cart);
+  const dispatch = useDispatch();
+
+
+  const addToCartNotifyHandler = function () {
+    dispatch(confirmAdd());
+  }
+
+  
 
   let filterIds = [];
 
@@ -44,6 +54,7 @@ function AllProducts() {
           price={product.price}
           saved={filterIds.includes(product.id)}
           discount={product.discountPercentage}
+          onNotify={addToCartNotifyHandler}
         />
       );
       lastCategory = product.category;
@@ -59,13 +70,6 @@ function AllProducts() {
     setFilterCtgyList(res.products);
   }
 
-  let productList = data;
-
-  if (filterCtgy === 'all') {
-    productList = data?.products;
-  } else {
-    productList = filterCtgyList
-  }
 
 
   return (
@@ -83,9 +87,12 @@ function AllProducts() {
           id={product.id}
           price={product.price}
           saved={filterIds.includes(product.id)}
-          discount={product.discountPercentage}
+            discount={product.discountPercentage}
+         
+            
         />  ) }
-        </ul>}
+      </ul>}
+    
     </div>
   );
 }
