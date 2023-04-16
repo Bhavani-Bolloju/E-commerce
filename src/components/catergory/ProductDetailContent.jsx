@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import classes from "./ProductDetailContent.module.scss";
-import { addItem, confirmAdd } from "../store/cartSlice";
-import { useDispatch } from "react-redux";
+import { addItem, confirmAdd,saveItem } from "../store/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 function ProductDetailContent({
   title,
@@ -17,6 +17,11 @@ function ProductDetailContent({
 
   const dispatch = useDispatch();
 
+  const { savedItems } = useSelector(state => state.cart);
+
+  const isSaved = savedItems.some(item => item.id === id);
+  
+  const [isItemSaved, setIsItemSaved] = useState(isSaved);
   const increaseQtyHandler = function () {
     if (count >= stock) return;
     setCount((prev) => (prev += 1));
@@ -30,6 +35,11 @@ function ProductDetailContent({
     dispatch(addItem({ title, price, qty: count, id, image, discount }));
   };
 
+
+  const toggleSaveItem = function () {
+    setIsItemSaved(prev => !prev);
+    dispatch(saveItem({title, id, price, image, discount}))
+  }
 
   return (
     <div>
@@ -80,10 +90,11 @@ function ProductDetailContent({
         <button className={classes["cart-btn"]} onClick={() => {
           addToCartHandler();
           dispatch(confirmAdd());
-          console.log('added')
         }}>
           Add to cart
         </button>
+
+        <button onClick={toggleSaveItem} className={classes['save-btn']}>{isItemSaved ? "Unsave item":'Save item'}</button>
       </div>
     </div>
   );

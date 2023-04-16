@@ -26,8 +26,6 @@ function AllProducts() {
     dispatch(confirmAdd());
   }
 
-  
-
   let filterIds = [];
 
   if (savedItems.length > 0) {
@@ -35,7 +33,6 @@ function AllProducts() {
   }
 
   const items = [];
-
   let lastCategory = null;
 
   data?.products &&

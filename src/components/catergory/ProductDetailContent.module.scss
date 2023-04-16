@@ -81,20 +81,35 @@
   }
 }
 .btns {
+  display: flex;
+  justify-content: center;
   text-align: center;
+  gap: 2rem;
+
+  button {
+    margin: 3rem 0;
+
+    padding: 0.8rem 1.8rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    border: 1px solid #445454;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }
 .cart-btn {
-  margin: 3rem 0;
-  background: transparent;
-  border: none;
   color: #445454;
-  font-weight: 700;
-  padding: 0.8rem 1.8rem;
-  border-radius: 0.5rem;
-  text-align: center;
-  border: 1px solid #445454;
+  background-color: transparent;
+  font-weight: 600;
   &:hover {
-    cursor: pointer;
     background-color: #edeeee6f;
   }
+}
+
+.save-btn {
+  background-color: #445454;
+  color: #eee;
+  font-weight: 300;
 }

@@ -5,6 +5,7 @@ import { IoIosArrowRoundBack } from "react-icons/io";
 import ProductDetailContent from "./ProductDetailContent";
 import { useNavigate } from "react-router-dom";
 
+
 function ProductDetails({ productId }) {
   const { data, isLoading, error } = useFetch(`products/${productId}`);
   const [selected, setSelected] = useState(0);
@@ -15,10 +16,13 @@ function ProductDetails({ productId }) {
   const navigate = useNavigate()
 
 
+
   const imageHandler = function (id, e) {
     setSelectedImage(e.target.src);
     setSelected(id);
   };
+
+
 
   return (
     <div className={classes["product-details"]}>

@@ -11,7 +11,7 @@ function Product({ id, images, title, price, discount, saved , onNotify}) {
   const { userDetails } = useContext(AuthContext);
   const dispatch = useDispatch();
   // const { cartNotification } = useSelector(state => state.cart);
-  const [save, onSave] = useState(saved);
+  const [save, setSave] = useState(saved);
   
   const discountPrice = (price - price * (discount / 100)).toFixed(2);
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ function Product({ id, images, title, price, discount, saved , onNotify}) {
   };
 
   const saveItemHandler = function (title, price, id, image, discount) {
-    onSave((prev) => !prev);
+    setSave((prev) => !prev);
     dispatch(saveItem({ title, price, id, image, discount }));
   };
  
