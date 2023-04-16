@@ -12,6 +12,11 @@ function Product({ id, images, title, price, discount, saved , onNotify}) {
   const dispatch = useDispatch();
   // const { cartNotification } = useSelector(state => state.cart);
   const [save, setSave] = useState(saved);
+ 
+
+  useEffect(() => {
+    setSave(saved)
+  },[saved])
   
   const discountPrice = (price - price * (discount / 100)).toFixed(2);
   const navigate = useNavigate();

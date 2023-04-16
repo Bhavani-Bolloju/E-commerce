@@ -18,9 +18,8 @@ function AllProducts() {
   const [filterCtgyList, setFilterCtgyList] = useState([])
   const { data, error, loading } = useFetch("products");
  
-  const {savedItems, cartNotification} = useSelector((state) => state?.cart);
+  const {savedItems} = useSelector((state) => state?.cart);
   const dispatch = useDispatch();
-
 
   const addToCartNotifyHandler = function () {
     dispatch(confirmAdd());
@@ -31,6 +30,8 @@ function AllProducts() {
   if (savedItems.length > 0) {
     filterIds = savedItems.length > 0 && savedItems.map((item) => item?.id);
   }
+
+  // console.log(filterIds, 'all products')
 
   const items = [];
   let lastCategory = null;
