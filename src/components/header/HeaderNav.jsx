@@ -105,8 +105,6 @@ function Header() {
                     </button>
                 </li>
                   )}
-
-                <li>Orders</li>
              
               </ul>
             )}
