@@ -22,9 +22,7 @@ function Product({ id, images, title, price, discount, saved }) {
   const navigate = useNavigate();
 
   const addToCardHandler = async function (image, title, price, id) {
-    if (userDetails?.docId) {
-      console.log(userDetails?.docId);
-    }
+  
     dispatch(addItem({ title, price, qty: 1, id, image, discount }));
   };
 
@@ -36,7 +34,7 @@ function Product({ id, images, title, price, discount, saved }) {
 
 
   return (
-    <>
+   
       <li key={id} className={classes.product} onClick={()=>{ navigate(`/${id}`) }}>
         <div className={classes.img}>
           <img src={images[0]} alt={title} />
@@ -67,7 +65,7 @@ function Product({ id, images, title, price, discount, saved }) {
           />
       </li>
      
-    </>
+ 
  
   );
 }

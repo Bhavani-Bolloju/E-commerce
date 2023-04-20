@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef } from "react";
+import React, { useState, useContext, useRef, useEffect } from "react";
 import classes from "./HeaderNav.module.scss";
 import { BsCart4 } from "react-icons/bs";
 import { CiUser } from "react-icons/ci";
@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 import { AuthContext } from "../context/authContext";
-import cart from "../images/header-cart.svg";
+import Popup from "../../UI/Popup";
 
 
 function Header() {
@@ -15,7 +15,8 @@ function Header() {
   const { cartItems } = useSelector((state) => state.cart);
   const [open, setOpen] = useState(false);
 
-    const refUser = useRef()
+
+ const refUser = useRef()
 
 
   const { isLoggedIn, logout } = useContext(AuthContext);
@@ -32,9 +33,9 @@ function Header() {
     setOpen(prev => !prev);
   };
 
-
-
   return (
+    <>
+    
     <header className={classes.header}>
       <div className={classes["header-container"]}>
         <h1
@@ -96,7 +97,8 @@ function Header() {
                       onClick={() => {
                         signOut(auth);
                         logout();
-                        // setOpen(false);
+                       
+                     
                       }}
                     >
                       Log out
@@ -113,7 +115,10 @@ function Header() {
           
         </div>
       </div>
-    </header>
+
+      </header>
+      
+  </>
   );
 }
 

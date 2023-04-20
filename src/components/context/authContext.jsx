@@ -4,7 +4,8 @@ import { getUser } from "../firebase/service";
 export const AuthContext = createContext({
   isLoggedIn: false,
   login: () => {},
-  logout: () => {},
+  logout: () => { },
+  confirmLogout:false,
 });
 
 const AuthContextProvider = function (props) {
@@ -13,6 +14,7 @@ const AuthContextProvider = function (props) {
 
   const [user, setUser] = useState(getuser);
   const [userDetails, setUserDetails] = useState(getuserdetails);
+  const [logoutNotification, setLogoutNotification] = useState(false);
 
   const isLoggedIn = !!user;
 
@@ -26,16 +28,23 @@ const AuthContextProvider = function (props) {
 
   const logOutHandler = function () {
     setUser(null);
+    setLogoutNotification(true)
     localStorage.removeItem("user");
     localStorage.removeItem("userdetails");
   };
 
-  const cntxValue = {
+  const logoutNotifyHandler = function () {
+    setLogoutNotification(false);
+  }
+
+  const cntxValue = { 
     user,
     userDetails,
     isLoggedIn,
     login: loggedUserHandler,
     logout: logOutHandler,
+    confirmLogout: logoutNotification,
+    logoutNotifyHandler
   };
 
   return (

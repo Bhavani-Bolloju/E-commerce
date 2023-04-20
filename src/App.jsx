@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import Header from "./components/header/HeaderNav";
 import MainPage from "./components/pages/MainPage";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import SavedItems from "./components/header/SavedItems";
 import CartPage from "./components/pages/CartPage";
 import ProductDetailPage from "./components/pages/ProductDetailPage";
@@ -14,13 +14,15 @@ import { sendCartData, sendSavedItems } from "./components/store/cartActions";
 import { fetchCartData, fetchSavedItems } from "./components/store/cartActions";
 import { confirmAdd, confirmRemove } from "./components/store/cartSlice";
 import Popup from "./UI/Popup";
+import { AnimatePresence } from "framer-motion";
 
 function App() {
-  const { isLoggedIn, userDetails } = useContext(AuthContext);
-  const { cartItems, totalAmount, savedItems, status, cartNotification, itemRemoveNotification } = useSelector(
+  const { isLoggedIn, userDetails,confirmLogout,
+logoutNotifyHandler
+ } = useContext(AuthContext);
+  const { cartItems, totalAmount, savedItems, status, cartNotification, itemRemoveNotification,  } = useSelector(
     (state) => state.cart
   );
-
 
   const dispatch = useDispatch();
 
@@ -66,10 +68,21 @@ function App() {
     }
   }, [savedItems, userDetails?.docId, status]);
 
+  useEffect(() => {
+    if (confirmLogout) {
+      setTimeout(() => {
+        logoutNotifyHandler()
+      }, 1000);
+    }
+  }, [confirmLogout]);
+
+const location =  useLocation()
+
   return (
-    <>
+    <div>
       <Header />
-      <Routes>
+      <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
         <Route path="/" element={<MainPage />} />
         <Route path="/:productId" element={<ProductDetailPage />} />
         <Route path="/cart" element={<CartPage />}>
@@ -88,18 +101,22 @@ function App() {
               <PlaceOrderPage />
             ) : (
               <Navigate to="/login" />
-            )
-          }
-        ></Route>
-      </Routes>
+              )
+            }
+            ></Route>
+         </Routes>
+      </AnimatePresence>
 
        {cartNotification && <div className='cart-confirmation'>
         <Popup>Added to the cart</Popup>
       </div>}
        {itemRemoveNotification && <div className='cart-confirmation'>
         <Popup>Removed from the cart</Popup>
+        </div>}
+       {confirmLogout && <div className='cart-confirmation'>
+        <Popup>Logged Out</Popup>
       </div>}
-    </>
+    </div>
   );
 }
 

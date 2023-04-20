@@ -85,12 +85,7 @@ const cartSlice = createSlice({
       console.log(action.payload);
       state.user = action.payload;
     },
-    orderConfirmed: (state, action) => {
-      state.status = true;
-      console.log("emptying cart");
-      state.cartItems = [];
-      state.totalAmount = 0;
-    },
+
     confirmAdd: (state) => {
       state.cartNotification = !state.cartNotification;
     },
@@ -108,7 +103,7 @@ export const {
   loggedUser,
   addFetchData,
   addFetchSavedItems,
-  orderConfirmed,
+
   confirmAdd,
   confirmRemove
 } = cartSlice.actions;

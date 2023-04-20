@@ -5,7 +5,7 @@ import {
   updateDoc,
   arrayUnion,
   getDocs,
-  doc,
+  doc
 } from "firebase/firestore";
 import { db } from "./firebase";
 
@@ -20,28 +20,28 @@ export const addToCart = async function (docId, cart, totalAmount) {
   const data = doc(db, "users", docId);
   await updateDoc(data, {
     cart: cart,
-    totalAmount: totalAmount,
+    totalAmount: totalAmount
   });
 };
 
 export const savedItems = async function (docId, saved) {
   const data = doc(db, "users", docId);
   await updateDoc(data, {
-    savedItems: saved,
+    savedItems: saved
   });
 };
 
 export const orderItems = async function (docId, cart) {
   const data = doc(db, "users", docId);
   await updateDoc(data, {
-    orderItems: arrayUnion({ cart, date: Date.now() }),
+    orderItems: arrayUnion({ cart, date: Date.now() })
   });
 };
 
 export const addAddress = async function (docId, address) {
   const data = doc(db, "users", docId);
   await updateDoc(data, {
-    address: address,
+    address: address
   });
 };
 

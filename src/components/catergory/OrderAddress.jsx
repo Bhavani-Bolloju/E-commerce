@@ -3,14 +3,13 @@ import classes from "./OrderAddress.module.scss";
 import { addAddress, orderItems } from "../firebase/service";
 import { AuthContext } from "../context/authContext";
 import { useDispatch, useSelector } from "react-redux";
-import { orderConfirmed } from "../store/cartSlice";
-import { sendCartData } from "../store/cartActions";
+
 
 function OrderAddress() {
   const [confirmOrder, setConfirmOrder] = useState(false);
   const { cartItems } = useSelector((state) => state.cart);
   const { userDetails } = useContext(AuthContext);
-  const dispatch = useDispatch();
+
 
   // console.log(cartItems);
 
@@ -25,9 +24,9 @@ function OrderAddress() {
       pincode: pincode.value,
       state: state.value,
     });
-    setConfirmOrder(true);
+
     await orderItems(userDetails?.docId, cartItems);
-    dispatch(orderConfirmed());
+    setConfirmOrder(true);
   };
 
   return (

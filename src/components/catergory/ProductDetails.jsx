@@ -4,6 +4,7 @@ import useFetch from "../hooks/use-fetch";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import ProductDetailContent from "./ProductDetailContent";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 
 function ProductDetails({ productId }) {
@@ -25,7 +26,13 @@ function ProductDetails({ productId }) {
 
 
   return (
-    <div className={classes["product-details"]}>
+    <motion.div
+
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+      className={classes["product-details"]}>
       <IoIosArrowRoundBack
         onClick={() => 
         navigate('/')
@@ -68,7 +75,7 @@ function ProductDetails({ productId }) {
           image={data?.images?.[0]}
         />
       )}
-    </div>
+    </motion.div>
   );
 }
 
