@@ -12,14 +12,15 @@ import { AuthContext } from "./components/context/authContext";
 import { useDispatch, useSelector } from "react-redux";
 import { sendCartData, sendSavedItems } from "./components/store/cartActions";
 import { fetchCartData, fetchSavedItems } from "./components/store/cartActions";
-import { confirmAdd } from "./components/store/cartSlice";
+import { confirmAdd, confirmRemove } from "./components/store/cartSlice";
 import Popup from "./UI/Popup";
 
 function App() {
   const { isLoggedIn, userDetails } = useContext(AuthContext);
-  const { cartItems, totalAmount, savedItems, status, cartNotification } = useSelector(
+  const { cartItems, totalAmount, savedItems, status, cartNotification, itemRemoveNotification } = useSelector(
     (state) => state.cart
   );
+
 
   const dispatch = useDispatch();
 
@@ -29,7 +30,16 @@ function App() {
        dispatch(confirmAdd()); 
       }, 500)
     }
-  },[cartNotification])
+  }, [cartNotification])
+  
+
+  useEffect(() => {
+    if (itemRemoveNotification) {
+      setTimeout(() => {
+       dispatch(confirmRemove()); 
+      }, 500)
+    }
+  },[itemRemoveNotification])
 
 
   useEffect(() => {
@@ -85,6 +95,9 @@ function App() {
 
        {cartNotification && <div className='cart-confirmation'>
         <Popup>Added to the cart</Popup>
+      </div>}
+       {itemRemoveNotification && <div className='cart-confirmation'>
+        <Popup>Removed from the cart</Popup>
       </div>}
     </>
   );

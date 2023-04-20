@@ -7,7 +7,7 @@ import { addItem, saveItem } from "../store/cartSlice";
 import { AuthContext } from "../context/authContext";
 
 
-function Product({ id, images, title, price, discount, saved , onNotify}) {
+function Product({ id, images, title, price, discount, saved }) {
   const { userDetails } = useContext(AuthContext);
   const dispatch = useDispatch();
   // const { cartNotification } = useSelector(state => state.cart);
@@ -52,7 +52,7 @@ function Product({ id, images, title, price, discount, saved , onNotify}) {
             onClick={(e) => {
               e.stopPropagation();
               addToCardHandler(images[0], title, discountPrice, id, discount);
-              onNotify();
+              // onNotify();
             }}
             >
             Add to cart

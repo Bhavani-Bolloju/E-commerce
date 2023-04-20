@@ -6,7 +6,8 @@ const initialState = {
   savedItems: [],
   user: null,
   status: false,
-  cartNotification: false
+  cartNotification: false,
+  itemRemoveNotification: false
 };
 
 const cartSlice = createSlice({
@@ -40,6 +41,7 @@ const cartSlice = createSlice({
       } else {
         state.cartItems.push(action.payload);
       }
+      state.cartNotification = true;
     },
     removeItem: (state, action) => {
       state.status = true;
@@ -53,6 +55,7 @@ const cartSlice = createSlice({
           (item) => item.id !== action.payload
         );
         state.cartItems = filteredItems;
+        state.itemRemoveNotification = true;
       } else {
         const updatedItem = { ...item, qty: +item.qty - 1 };
         state.cartItems[index] = updatedItem;
@@ -88,8 +91,11 @@ const cartSlice = createSlice({
       state.cartItems = [];
       state.totalAmount = 0;
     },
-    confirmAdd: (state, action) => {
+    confirmAdd: (state) => {
       state.cartNotification = !state.cartNotification;
+    },
+    confirmRemove: (state) => {
+      state.itemRemoveNotification = !state.itemRemoveNotification;
     }
   }
 });
@@ -103,7 +109,8 @@ export const {
   addFetchData,
   addFetchSavedItems,
   orderConfirmed,
-  confirmAdd
+  confirmAdd,
+  confirmRemove
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

@@ -21,9 +21,7 @@ function AllProducts() {
   const {savedItems} = useSelector((state) => state?.cart);
   const dispatch = useDispatch();
 
-  const addToCartNotifyHandler = function () {
-    dispatch(confirmAdd());
-  }
+
 
   let filterIds = [];
 
@@ -52,7 +50,7 @@ function AllProducts() {
           price={product.price}
           saved={filterIds.includes(product.id)}
           discount={product.discountPercentage}
-          onNotify={addToCartNotifyHandler}
+         
         />
       );
       lastCategory = product.category;

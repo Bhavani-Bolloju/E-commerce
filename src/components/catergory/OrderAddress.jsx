@@ -14,6 +14,8 @@ function OrderAddress() {
 
   // console.log(cartItems);
 
+  //get user address if(cofirm)/else (add new add) 
+
   const submitFormHandler = async function (e) {
     e.preventDefault();
     const { streetaddress, city, pincode, state } = e.target.elements;
