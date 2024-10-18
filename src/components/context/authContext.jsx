@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
 import { getUser } from "../firebase/service";
+import React from "react";
 
 export const AuthContext = createContext({
   isLoggedIn: false,
