@@ -1,12 +1,12 @@
+import React from "react";
 import { createContext, useState } from "react";
 import { getUser } from "../firebase/service";
-import React from "react";
 
 export const AuthContext = createContext({
   isLoggedIn: false,
   login: () => {},
-  logout: () => { },
-  confirmLogout:false,
+  logout: () => {},
+  confirmLogout: false
 });
 
 const AuthContextProvider = function (props) {
@@ -29,16 +29,16 @@ const AuthContextProvider = function (props) {
 
   const logOutHandler = function () {
     setUser(null);
-    setLogoutNotification(true)
+    setLogoutNotification(true);
     localStorage.removeItem("user");
     localStorage.removeItem("userdetails");
   };
 
   const logoutNotifyHandler = function () {
     setLogoutNotification(false);
-  }
+  };
 
-  const cntxValue = { 
+  const cntxValue = {
     user,
     userDetails,
     isLoggedIn,
